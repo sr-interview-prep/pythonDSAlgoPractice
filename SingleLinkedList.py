@@ -1,6 +1,7 @@
 # Write a linked list with the below functions
 '''
 append, prepend, pop, pop_first, get, set_value, insert, remove, 
+print_list, reverse
 '''
 
 class Node:
