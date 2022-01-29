@@ -5,7 +5,8 @@ Algorithm
 '''
 
 # 3 2 1
-# 2 3 1 to perform this operation we need 
+# 2 3 1 
+# 2 1 3
 # 1 2 3 
 def insertion_sort(my_list):
     for i in range(1, len(my_list)):
