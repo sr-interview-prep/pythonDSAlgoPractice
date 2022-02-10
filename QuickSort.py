@@ -1,8 +1,9 @@
 '''
 Algoritm
 1) Take first element as the pivot
-2) Check how next elements are greater, and replace the 1st spotted great element with the subsequent low spotted element
-3) swap the pivot element with the 1st greater elements (now the pivot element is sorted)
+2) Check from 2nd element if that is greater than the pivot element, if yes inc the swap_index and then swap i and and swap_index value
+3) At the end of the loop swap the swap_index and pivot_index value. This will ensure that all small elements are left of pivot and big elements are right of pivot
+4) The call quick sort on the left elements, and right elements in a recursion with base case being left index should be greater than right index
 '''
 def swap(my_list, index1, index2):
     temp=my_list[index1]
