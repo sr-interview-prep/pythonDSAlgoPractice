@@ -1,6 +1,6 @@
 '''
 Algorithm
-1) Go through the entire list to find the element with least index
+1) Go through the entire list to find the index of element with least value
 2) Replace first element with that min value index element
 3) Repeat the process with the 2nd element in the list
 '''
