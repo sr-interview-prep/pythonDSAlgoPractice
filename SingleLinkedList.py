@@ -41,12 +41,12 @@ class LinkedList:
         if self.length==1:
             self.head=None
             self.tail=None
-        else:
+        else:  
             while(temp.next):
-                prev=temp
+                before=temp
                 temp=temp.next
-            prev.next=None
-            self.tail=prev
+            before.next=None
+            self.tail=before
         self.length-=1
         return temp
     def pop_first(self):
@@ -56,7 +56,7 @@ class LinkedList:
         if self.length==1:
             self.head=None
             self.tail=None
-        else:
+        else:   
             self.head=temp.next
             temp.next=None
         self.length-=1
@@ -79,12 +79,12 @@ class LinkedList:
             return False
         if index==0:
             return self.prepend(value)
-        if index==self.length:
+        if index==self.length-1:
             return self.append(value)
         new_node=Node(value)
-        prev=self.get(index-1)
-        after=prev.next
-        prev.next=new_node
+        before = self.get(index-1)
+        after=before.next
+        before.next=new_node
         new_node.next=after
         self.length+=1
         return True
@@ -93,18 +93,18 @@ class LinkedList:
             return False
         if index==0:
             return self.pop_first()
-        if index==self.length:
+        if index==self.length-1:
             return self.pop()
         if self.length==1:
             temp=self.head
             self.head=None
             self.tail=None
-            self.length=0
+            self.length==0
             return temp
-        prev=self.get(index-1)
-        temp=prev.next
+        before=self.get(index-1)
+        temp=before.next
         after=temp.next
-        prev.next=after
+        before.next=after
         temp.next=None
         self.length-=1
         return temp
@@ -113,18 +113,27 @@ class LinkedList:
         for _ in range(self.length):
             print(temp.value)
             temp=temp.next
-        
     def reverse(self):
-        # reverse head and tail
+        #reverse head and tail
         temp=self.head
         self.head=self.tail
         self.tail=temp
-        #define before and after values
-        after=temp.next
+        #define the before value
         before=None
-        #swap them over a loop
+        #swap the links over a loop and move the before and current pointers forward
         for _ in range(self.length):
             after=temp.next
             temp.next=before
             before=temp
             temp=after
+        return True
+
+
+
+
+
+
+
+        
+
+
