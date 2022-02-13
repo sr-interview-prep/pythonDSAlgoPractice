@@ -3,13 +3,12 @@
 append, prepend, pop, pop_first, get, set_value, insert, remove, 
 print_list, reverse
 '''
-
 class Node:
-    def __init__(self,value):
+    def __init__(self, value):
         self.value=value
         self.next=None
 class LinkedList:
-    def __init__(self,value):
+    def __init__(self, value):
         new_node=Node(value)
         self.head=new_node
         self.tail=new_node
@@ -41,8 +40,8 @@ class LinkedList:
         if self.length==1:
             self.head=None
             self.tail=None
-        else:  
-            while(temp.next):
+        else:
+            while temp.next:
                 before=temp
                 temp=temp.next
             before.next=None
@@ -56,7 +55,7 @@ class LinkedList:
         if self.length==1:
             self.head=None
             self.tail=None
-        else:   
+        else:
             self.head=temp.next
             temp.next=None
         self.length-=1
@@ -82,7 +81,7 @@ class LinkedList:
         if index==self.length-1:
             return self.append(value)
         new_node=Node(value)
-        before = self.get(index-1)
+        before=self.get(index-1)
         after=before.next
         before.next=new_node
         new_node.next=after
@@ -95,12 +94,6 @@ class LinkedList:
             return self.pop_first()
         if index==self.length-1:
             return self.pop()
-        if self.length==1:
-            temp=self.head
-            self.head=None
-            self.tail=None
-            self.length==0
-            return temp
         before=self.get(index-1)
         temp=before.next
         after=temp.next
@@ -130,6 +123,12 @@ class LinkedList:
 
 
 
+
+        
+        
+
+
+            
 
 
 
