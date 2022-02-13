@@ -3,10 +3,6 @@
 append, prepend, pop, pop_first, get, set_value, insert, remove, 
 print_list, reverse
 '''
-from telnetlib import DO
-from tkinter.messagebox import NO
-
-
 class Node:
     def __init__(self, value):
         self.value=value
@@ -18,15 +14,9 @@ class DoubleLinkedList:
         self.head=new_node
         self.tail=new_node
         self.length=1
-    def print_list(self):
-        temp=self.head
-        while (temp):
-            print(temp.value)
-            temp=temp.next
-        print('lengh of the DLL is ', self.length)
-    def append(self,value):
+    def append(self, value):
         new_node=Node(value)
-        if self.head is None:
+        if self.length==0:
             self.head=new_node
             self.tail=new_node
         else:
@@ -37,7 +27,7 @@ class DoubleLinkedList:
         return True
     def prepend(self, value):
         new_node=Node(value)
-        if self.head is None:
+        if self.length==0:
             self.head=new_node
             self.tail=new_node
         else:
@@ -50,67 +40,69 @@ class DoubleLinkedList:
         if self.length==0:
             return False
         temp=self.tail
-        before=temp.prev
-        before.next=None
-        self.tail=before 
-        temp.prev=None
-        self.length-=1
-        if self.length==0:
+        if self.length==1:
             self.head=None
             self.tail=None
-        return temp   
+        else:
+            before=temp.prev
+            before.next=None
+            temp.prev=None
+            self.tail=before
+        self.length-=1
+        return temp
     def pop_first(self):
         if self.length==0:
             return False
         temp=self.head
-        if self.length==0:
+        if self.length==1:
             self.head=None
             self.tail=None
         else:
             after=temp.next
             after.prev=None
-            self.head=after
             temp.next=None
-        self.length-=1
+            self.head=after
+        self.length-=1            
         return temp
     def get(self, index):
-        if index<0 or index>self.length:
+        if index<0 or index>=self.length:
             return False
-        temp=self.head
-        for _ in range(index):
-            temp=temp.next
-        return temp
-    def set(self, index, value):
+        else:
+            temp=self.head
+            for _ in range(index):
+                temp=temp.next
+            return temp
+    def set_value(self, index, value):
         temp=self.get(index)
         if temp:
             temp.value=value
             return True
         return False
     def insert(self, index, value):
-        if index<0 or index>self.length:
+        if index<0 or index>=self.length:
             return False
-        if index == 0:
+        if index==0:
             return self.prepend(value)
-        if index == self.length:
+        if index==self.length-1:
             return self.append(value)
         new_node=Node(value)
-        before = self.get(index-1)
+        before=self.get(index-1)
         after=before.next
-        new_node.next=after
         new_node.prev=before
         before.next=new_node
+        new_node.next=after
         after.prev=new_node
         self.length+=1
         return True
-    def remove(self, index):
-        if index<0 or index>self.length:
+    def remove(self,index):
+        if index<0 or index>=self.length:
             return False
-        if index == 0:
+        if index==0:
             return self.pop_first()
-        if index == self.length:
+        if index==self.length-1:
             return self.pop()
-        before=self.get(index-1)
-        temp=before.next
+        temp=self.get(index)
+        before=temp.prev
         after=temp.next
         before.next=after
         after.prev=before
@@ -118,11 +110,34 @@ class DoubleLinkedList:
         temp.prev=None
         self.length-=1
         return temp
+    def print_list(self):
+        temp=self.head
+        for _ in range(self.length):
+            print(temp.value)
+            temp=temp.next
+    def reverse(self):
+        temp=self.head
+        self.head=self.tail
+        self.tail=temp
+
+        before=None
+
+        for _ in range(self.length):
+            after=temp.next
+            temp.next=before
+            temp.prev=after
+            before=temp
+            temp=after
+
+
 DLL=DoubleLinkedList(1)
 DLL.append(3)
 DLL.append(4)
 DLL.prepend(5)
-DLL.remove(4)
+# DLL.remove(4)
+DLL.print_list()
+DLL.reverse()
+print('after reversal')
 DLL.print_list()
 
 

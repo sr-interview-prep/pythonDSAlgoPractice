@@ -120,19 +120,3 @@ class LinkedList:
             before=temp
             temp=after
         return True
-
-
-
-
-        
-        
-
-
-            
-
-
-
-
-        
-
-
