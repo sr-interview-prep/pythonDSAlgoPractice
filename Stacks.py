@@ -34,6 +34,8 @@ class Stack:
             self.top=after
         self.length-=1
         return temp
+    def peek(self):
+        return self.top.value
     def print_stack(self):
         temp=self.top
         for _ in range(self.length):
@@ -46,5 +48,6 @@ s.push(5)
 s.pop()
 s.push(6)
 s.pop()
+print('top most element is',s.peek())
 s.print_stack()
 
