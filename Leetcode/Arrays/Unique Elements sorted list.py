@@ -12,9 +12,13 @@ def uniqueElements(nums):
         return 0
     i=0
     for j in range(1,len(nums)):
+        print(i,j)
         if nums[i]!=nums[j]:
             i+=1
-            nums[i]=nums[j]    
+            nums[i]=nums[j]
+            print(nums)    
+        else:
+            print(nums)
     print(nums)        
     return i+1
 print(uniqueElements([1,1,1,2,2,2,3,3,4,4]))
