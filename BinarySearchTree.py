@@ -3,7 +3,10 @@
 no. of nodes in a Binary Search tree are 2^n-1 where n is the no. of levels
 O(log(n)) to search any element within the tree
 '''
-'insert, contains, min_value_node'
+'insert, contains, min_value_node, BFS,dfs_pre_order,dfs_post_order,dfs_in_order'
+
+from unittest import result
+
 
 class Node:
     def __init__(self, value):
@@ -50,7 +53,57 @@ class BinarySearchTree:
     def min_value_node(self, current_node):
         while current_node.left is not None:
             current_node=current_node.left
-        return current_node
+        return 
+        'In the queues list you store the node, whereas on the results list you store the values'
+    def BFS(self):
+        current_node = self.root
+        queue = []
+        results = []
+        queue.append(current_node)
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            results.append(current_node.value)
+            if current_node.left is not None:
+                queue.append(current_node.left)
+            if current_node.right is not None:
+                queue.append(current_node.right)
+        return results
+    'root->left->left->if left null then right-> if right null parent-> left and repeat'
+    def dfs_pre_order(self):
+        results = []
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+    'left most child-> right counterpart-> parent-> root->left most of the right branch-> repeat'
+    def dfs_post_order(self):
+        results = []
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+            results.append(current_node.value)
+        traverse(self.root)
+        return results
+    'left most->parent->right counter-part-> root-> repeat'
+    def dfs_in_order(self):
+        results = []
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            results.append(current_node.value) 
+            if current_node.right is not None:
+                traverse(current_node.right)          
+        traverse(self.root)
+        return results
+
+
 
 bst=BinarySearchTree()
 bst.insert(47)
@@ -60,11 +113,12 @@ bst.insert(18)
 bst.insert(27)
 bst.insert(52)
 bst.insert(82)
-print(bst.root.value)
-print(bst.root.left.value)
-print(bst.root.right.value)
+# print(bst.root.value)
+# print(bst.root.left.value)
+# print(bst.root.right.value)
 
-print(bst.contains(27))
-print(bst.contains(17))
-print(bst.min_value_node(bst.root).value)
-print(bst.min_value_node(bst.root.right).value)
+# print(bst.contains(27))
+# print(bst.contains(17))
+# print(bst.min_value_node(bst.root).value)
+# print(bst.min_value_node(bst.root.right).value)
+print(bst.BFS())
