@@ -2,12 +2,9 @@
 def removeElement(nums, val): 
     i = 0
     for j in range(len(nums)):
-        print(i,j)
         if nums[j] != val: 
             nums[i] = nums[j]
             i+=1
-            print(nums)
-        else:
-            print(nums)
+    print(nums)
     return i
-print(removeElement([0,1,2,2,3,0,4,2],2))
+print(removeElement([3,3,3,2,2,2,3,3,4,5,3,3,5,5],2))
