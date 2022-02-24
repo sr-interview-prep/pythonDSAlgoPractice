@@ -64,6 +64,10 @@ class BinarySearchTree:
             if current_node.right is not None:
                 queue.append(current_node.right)
         return results
+
+# preoder - push elements very 1st time when reached in the traversal
+# inorder - push elements 2nd time when reached in the traversal
+# postorder - push elements 3rd time when reached in the traversal
     def dfs_pre_order(self):
         results=[]
         def traverse(current_node):
