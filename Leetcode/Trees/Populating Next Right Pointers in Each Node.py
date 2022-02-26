@@ -24,3 +24,34 @@ Example 2:
 Input: root = []
 Output: []
 '''
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root is None:
+            return None
+        queue = [root]
+        total_node = 1
+        while queue:
+            count_node=1
+            for i in range(len(queue)):
+                node=queue.pop(0)
+                if count_node == total_node:
+                    node.next=None
+                else:
+                    node.next=queue[0]
+                if node.left!=None:
+                    queue.append(node.left)
+                if node.right!=None:
+                    queue.append(node.right)
+                count_node+=1
+            total_node*=2
+        return root
