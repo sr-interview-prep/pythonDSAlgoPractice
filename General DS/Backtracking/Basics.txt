@@ -1,0 +1,5 @@
+It's a form of recursion(in a optimized manner by discarding certain states that brute force cannot)
+Called constraint satisfaction problems
+back-tracking and DFS are similar
+create a search tree structure and back track when it hits a bad state
+

@@ -1,3 +1,5 @@
+'''Works best in the case of small Array's (smaller than 10) where possibility of achieving linear time complexity is more'''
+
 '''
 Algorithm
 1) Start with 2nd item compare it with 1st, if less then insert 2nd at 1st postion

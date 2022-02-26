@@ -1,5 +1,20 @@
 # Mainly used to find the k-th order statistic (not many, if many better go for sorting)
 
+
+
+# If the pivot element is chosen as the median of the array, O(n) time complexity is 
+# gauranteed but at the expense 
+#of o(log n) space complexity
+
+'''To make the above statement work, split the array into 5 element chunks sort them with insertion sort
+whose time complexity is O(n). Later find the median of each arrays, sort them using insertion sort
+and then find the median of medians as the pivot value'''
+'''The combination of medians algo with quick select algo is called introselect algo'''
+
+def median_index(my_list):
+    # for the moment hardcoded to 2, but need an algo for it
+    return 2
+
 def swap(my_list, index1, index2):
     temp=my_list[index1]
     my_list[index1]=my_list[index2]
@@ -18,8 +33,9 @@ def pivot(my_list, pivot_index, end_index):
 
 def quick_select(my_list, left, right,k):
     if left<=right:
+        pivot_index=median_index(my_list)
+        swap(my_list,pivot_index,left)
         pivot_index=pivot(my_list, left, right)
-        # print(pivot_index)
         if k-1==pivot_index-1:
             return my_list[k]
         elif k-1<pivot_index-1:
