@@ -31,23 +31,23 @@ def pivot(my_list, pivot_index, end_index):
     my_list=swap(my_list,pivot_index,swap_index)
     return swap_index
 
-def quick_select(my_list, left, right,k):
+def quick_select_kth_greatest_value(my_list, left, right,k):
     if left<=right:
         pivot_index=median_index(my_list)
         swap(my_list,pivot_index,left)
         pivot_index=pivot(my_list, left, right)
-        if k-1==pivot_index-1:
+        if k==pivot_index:
             return my_list[k]
-        elif k-1<pivot_index-1:
-            return quick_select(my_list,left, pivot_index-1,k)
-        elif k-1>pivot_index-1:
-            return quick_select(my_list, pivot_index+1,right,k)        
+        elif k<pivot_index:
+            return quick_select_kth_greatest_value(my_list,left, pivot_index-1,k)
+        elif k>pivot_index:
+            return quick_select_kth_greatest_value(my_list, pivot_index+1,right,k)        
     # return pivot_index
 
 my_list=[4,6,1,7,3,2,5]
 def quick_selecter_helper(my_list, n):
-    return quick_select(my_list,0, len(my_list)-1,n-1)
+    return quick_select_kth_greatest_value(my_list,0, len(my_list)-1,n-1)
 
-print(quick_selecter_helper(my_list,1))
+print(quick_selecter_helper(my_list,4))
 
 
