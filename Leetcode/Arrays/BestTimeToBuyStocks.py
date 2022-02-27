@@ -25,11 +25,11 @@ class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         min_value=prices[0]
         max_profit=0
-        for j in range(1, len(prices)):
-            if prices[j]<min_value:
-                min_value=prices[j]
-            if max_profit<prices[j]-min_value:
-                max_profit=prices[j]-min_value
+        for i in range(1, len(prices)):
+            if prices[i]<min_value:
+                min_value=i
+            if prices[i]-min_value>max_profit:
+                max_profit=prices[i]-min_value
         return max_profit
             
-            
+            # [7,1,5,3,6,4]
