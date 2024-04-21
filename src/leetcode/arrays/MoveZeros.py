@@ -1,9 +1,9 @@
-'''
+"""
 Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
 Note that you must do this in-place without making a copy of the array.
 
- 
+
 
 Example 1:
 
@@ -13,24 +13,23 @@ Example 2:
 
 Input: nums = [0]
 Output: [0]
- 
-'''
+
+"""
+
 
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-        p=0
-        q=0
+        p = 0
+        q = 0
         for i in range(len(nums)):
-            if nums[i]==0:
-                q+=1
+            if nums[i] == 0:
+                q += 1
             else:
-                temp=nums[p]
-                nums[p]=nums[q]
-                nums[q]=temp
-                p+=1
-                q+=1
-            
-        
+                temp = nums[p]
+                nums[p] = nums[q]
+                nums[q] = temp
+                p += 1
+                q += 1
