@@ -1,4 +1,5 @@
-'''You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+"""
+You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
 Merge nums1 and nums2 into a single array sorted in non-decreasing order.
 
@@ -25,42 +26,42 @@ Output: [1]
 Explanation: The arrays we are merging are [] and [1].
 The result of the merge is [1].
 Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
- 
- '''
-class Solution(object):
-    def merge(nums1, m, nums2, n):
-        """
-        :type nums1: List[int]
-        :type m: int
-        :type nums2: List[int]
-        :type n: int
-        :rtype: None Do not return anything, modify nums1 in-place instead.
-        """
-        i = m-1
-        j = n-1
-        index1 = m+n-1
-        
+
+ """
+from typing import List
+
+
+class MergeTwoSortedArrays(object):
+    def __init__(self, nums1: List[int], m: int, nums2: List[int], n: int):
+        self.nums1 = nums1
+        self.nums2 = nums2
+        self.m = m
+        self.n = n
+
+    def merge(self):
+        i = self.m - 1
+        j = self.n - 1
+        index1 = self.m + self.n - 1
+
         while i >= 0 and j >= 0:
-            if nums1[i] > nums2[j]:
-                nums1[index1] = nums1[i]
+            if self.nums1[i] > self.nums2[j]:
+                self.nums1[index1] = self.nums1[i]
                 i -= 1
-                index1 -= 1    
-            elif nums2[j] > nums1[i]:
-                nums1[index1] = nums2[j]
+                index1 -= 1
+            elif self.nums2[j] > self.nums1[i]:
+                self.nums1[index1] = self.nums2[j]
                 j -= 1
                 index1 -= 1
-        #When ith and jth elements are equal in value
+            # When ith and jth elements are equal in value
             else:
-                nums1[index1] = nums1[i]
-                nums1[index1-1] = nums2[j]
+                self.nums1[index1] = self.nums1[i]
+                self.nums1[index1 - 1] = self.nums2[j]
                 i -= 1
                 j -= 1
                 index1 -= 2
         # If most elements of j are less than elements of i, i will go to zero and we come to this while loop
         while j >= 0:
-            nums1[index1] = nums2[j]
+            self.nums1[index1] = self.nums2[j]
             j -= 1
             index1 -= 1
-        return nums1
-
-print(Solution.merge([1,2,3,0,0,0],3,[2,5,6],3))
+        return self.nums1
