@@ -1,4 +1,4 @@
-'''Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+"""Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
 
  
 
@@ -14,39 +14,31 @@ Example 3:
 
 Input: s = "aabb"
 Output: -1
-'''
+"""
+
 
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        hashMap=set()
-        hashMap2=set()
-        for i in range(len(s)):
-            if s[i] not in hashMap:
-                hashMap.add(s[i])
+        general_characters = set()
+        repeated_characters = set()
+        for i in s:
+            if i not in general_characters:
+                general_characters.add(i)
             else:
-                hashMap2.add(s[i])
+                repeated_characters.add(i)
         for i in range(len(s)):
-            if s[i] not in hashMap2:
+            if s[i] not in repeated_characters:
                 return i
         return -1
 
-#dictionary approach
-class Solution:
-	def firstUniqChar(self, s: str) -> int:
-
-		frequecy = {}
-
-		for i in range(len(s)):
-
-			if s[i] not in frequecy:
-				frequecy[s[i]] = 1
-			else:
-				frequecy[s[i]] = frequecy[s[i]] + 1
-
-		for i in range(len(s)):
-			if frequecy[s[i]]==1:
-				return i
-
-		return -1
-            
-            
+    def alternate_first_unique_char(sef, s: str) -> int:
+        frequency = {}
+        for i in s:
+            if i not in frequency:
+                frequency[i] = 1
+            else:
+                frequency[i] += 1
+        for i in range(len(s)):
+            if frequency[s[i]] == 1:
+                return i
+        return -1
