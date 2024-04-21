@@ -1,4 +1,4 @@
-class Solution:
+class LongestNonRepeatingSubstring:
     def __init__(self, s: str):
         self.s = s
 
@@ -52,7 +52,7 @@ class Solution:
             - The space used by the set `char_set` depends on the size of the charset (m) or the size of the string (n), whichever is smaller.
 
         Returns:
-        - String representing the longest substring without repeating characters.
+        - strings representing the longest substring without repeating characters.
         """
         left = 0
         right = 0

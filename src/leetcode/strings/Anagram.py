@@ -16,25 +16,29 @@ Output: false
 """
 
 
-class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
+class Anagram:
+    def __init__(self, base_str: str, test_str: str):
+        self.base_str = test_str
+        self.test_str = base_str
+
+    def is_anagram(self) -> bool:
+        if len(self.base_str) != len(self.test_str):
             return False
         frequency_s = {}
-        for i in s:
+        for i in self.base_str:
             if i not in frequency_s:
                 frequency_s[i] = 1
             else:
                 frequency_s[i] += 1
         frequency_t = {}
-        for i in t:
+        for i in self.test_str:
             if i not in frequency_t:
                 frequency_t[i] = 1
             else:
                 frequency_t[i] += 1
 
         for i in frequency_s:
-            if frequency_t[i] != frequency_t[i]:
+            if frequency_s.get(i) != frequency_t.get(i):
                 return False
 
         return True
