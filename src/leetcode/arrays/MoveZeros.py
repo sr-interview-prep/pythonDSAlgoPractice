@@ -15,21 +15,26 @@ Input: nums = [0]
 Output: [0]
 
 """
+from typing import List
 
 
-class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
+class MoveZeros:
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def move_zeros(self) -> List[int]:
         """
         Do not return anything, modify nums in-place instead.
         """
         p = 0
         q = 0
-        for i in range(len(nums)):
-            if nums[i] == 0:
+        for i in range(len(self.nums)):
+            if self.nums[i] == 0:
                 q += 1
             else:
-                temp = nums[p]
-                nums[p] = nums[q]
-                nums[q] = temp
+                temp = self.nums[p]
+                self.nums[p] = self.nums[q]
+                self.nums[q] = temp
                 p += 1
                 q += 1
+        return self.nums

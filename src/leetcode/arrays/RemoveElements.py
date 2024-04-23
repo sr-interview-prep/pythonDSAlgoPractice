@@ -1,10 +1,16 @@
-'''Remove a particular element and count the remaining elements in the list'''
-def removeElement(nums, val): 
-    i = 0
-    for j in range(len(nums)):
-        if nums[j] != val: 
-            nums[i] = nums[j]
-            i+=1
-    print(nums)
-    return i
-print(removeElement([3,3,3,2,2,2,3,3,4,5,3,3,5,5],2))
+"""Remove a particular element and count the remaining elements in the list"""
+from typing import List
+
+
+class RemoveElementRemainingCount:
+    def __init__(self, nums: List, val: int):
+        self.nums = nums
+        self.val = val
+
+    def remove_element_remaining_count(self):
+        i = 0
+        for j in range(len(self.nums)):
+            if self.nums[j] != self.val:
+                self.nums[i] = self.nums[j]
+                i += 1
+        return i
