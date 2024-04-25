@@ -1,4 +1,4 @@
-from src.leetcode.strings.LongestNonRepeatingSubstring import LongestNonRepeatingSubstring
+from leetcode.strings.LongestNonRepeatingSubstring import LongestNonRepeatingSubstring
 
 
 def test_longest_non_repeating_substring():
