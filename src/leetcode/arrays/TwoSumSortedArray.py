@@ -26,19 +26,20 @@ Output: [1,2]
 Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 
 '''
+from typing import List
 
-class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        l=0
-        r=len(numbers)-1
-        while l<r:
-            if numbers[l]+numbers[r]<target:
-                l+=1
-            elif numbers[l]+numbers[r]>target:                
-                r-=1         
-            elif numbers[l]+numbers[r]==target:                
-                return [l+1, r+1]
+
+class TwoSumSortedArray:
+    @staticmethod
+    def execute(numbers: List[int], target: int) -> List[int]:
+        l = 0
+        r = len(numbers) - 1
+        while l < r:
+            if numbers[l] + numbers[r] < target:
+                l += 1
+            elif numbers[l] + numbers[r] > target:
+                r -= 1
+            elif numbers[l] + numbers[r] == target:
+                return [l + 1, r + 1]
             else:
                 return None
-            
-        

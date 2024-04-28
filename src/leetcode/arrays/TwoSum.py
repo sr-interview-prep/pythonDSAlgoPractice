@@ -8,12 +8,15 @@ Input: nums = [2,7,11,15], target = 9
 Output: [0,1]
 Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 '''
+from typing import List
 
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        ht={}
+
+class TwoSum:
+    @staticmethod
+    def execute(nums: List[int], target: int) -> List[int]:
+        ht = {}
         for i in range(len(nums)):
             if nums[i] in ht:
-                return [ht[nums[i]],i]
+                return [ht[nums[i]], i]
             else:
-                ht[target-nums[i]]=i
+                ht[target - nums[i]] = i
