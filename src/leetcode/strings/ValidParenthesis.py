@@ -1,11 +1,11 @@
-'''
+"""
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
 
 Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
- 
+
 
 Example 1:
 
@@ -19,19 +19,20 @@ Example 3:
 
 Input: s = "(]"
 Output: false
-'''
+"""
 
 
-class Solution:
-    def isValid(self, s: str) -> bool:
-        dictt={'(':')','{':'}','[':']'}
-        stack=[]
+class ValidParenthesis:
+    @staticmethod
+    def execute(s: str) -> bool:
+        dict_object = {'(': ')', '{': '}', '[': ']'}
+        stack = []
         for i in s:
-            if i in dictt:
+            if i in dict_object:
                 stack.append(i)
-            elif stack==[] or dictt[stack.pop()]!=i:
+            elif stack == [] or dict_object[stack.pop()] != i:
                 return False
-        if stack==[]:
+        if not stack:
             return True
         else:
             return False

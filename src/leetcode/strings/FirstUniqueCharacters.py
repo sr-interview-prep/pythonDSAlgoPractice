@@ -17,8 +17,9 @@ Output: -1
 """
 
 
-class Solution:
-    def firstUniqChar(self, s: str) -> int:
+class FirstUniqueCharacters:
+    @staticmethod
+    def execute(s: str) -> int:
         general_characters = set()
         repeated_characters = set()
         for i in s:
@@ -31,7 +32,8 @@ class Solution:
                 return i
         return -1
 
-    def alternate_first_unique_char(sef, s: str) -> int:
+    @staticmethod
+    def execute_alternate(s: str) -> int:
         frequency = {}
         for i in s:
             if i not in frequency:
