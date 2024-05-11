@@ -1,7 +1,12 @@
-from data_structures.Sorting.BubbleSort import bubble_sort
+from data_structures.Sorting.BubbleSort import BubbleSort
 
 
 def test_bubble_sort():
+    bubble_sort = BubbleSort()
+
     input_list = [2, 4, 5, 1, 3, 6]
-    sorted_list = bubble_sort(my_list=input_list)
-    assert sorted_list == sorted(input_list)
+    ascending_list = bubble_sort.ascending(input_list=input_list)
+    assert ascending_list == sorted(input_list)
+
+    descending_list = bubble_sort.descending(input_list=input_list)
+    assert descending_list == sorted(input_list, reverse=True)
