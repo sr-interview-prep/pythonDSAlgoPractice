@@ -1,8 +1,12 @@
 """
 Algorithm
-1) Start with first element and compare it with the rest of the list and do swaps
-2) By now we have the greatest element at the last position
-3) repeat the operation from first element until last 2nd element and stop when the  end of the list is reached
+Start at the end of the list and look at each pair of neighboring numbers.
+Compare each pair: If the first number is bigger than the second, swap them.
+Keep doing this: Move through the list, comparing and swapping pairs, until you've gone through the whole list once.
+Repeat: Go through the list again, but this time stop before the last element because the biggest number is already in its place.
+Keep repeating: Each time you go through the list, the biggest unsorted number "bubbles up" to its correct position.
+Keep going until the list is sorted: Keep repeating these steps until the whole list is sorted from smallest to largest.
+Finished: Once no more swaps are needed, the list is sorted, and you're done!
 """
 from typing import List
 
