@@ -25,8 +25,8 @@ class BubbleSort:
     def descending(input_list: List):
         for i in range(len(input_list) - 1, 0, -1):
             for j in range(0, i):
-                if input_list[j] < input_list[j + 1]:
-                    temp = input_list[j]
-                    input_list[j] = input_list[j + 1]
-                    input_list[j + 1] = temp
+                if input_list[j + 1] > input_list[j]:
+                    tmp = input_list[j + 1]
+                    input_list[j + 1] = input_list[j]
+                    input_list[j] = tmp
         return input_list
