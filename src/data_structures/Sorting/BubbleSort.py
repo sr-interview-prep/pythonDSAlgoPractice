@@ -1,12 +1,12 @@
 """
 Algorithm
-Start with the first element of the list and look at each pair of neighboring numbers.
-Compare each pair: If the first number is bigger than the second, swap them.
-Keep doing this: Move through the list, comparing and swapping pairs, until you've gone through the whole list once.
-Repeat: Go through the list again, but this time stop before the last element because the biggest number is already in its place.
-Keep repeating: Each time you go through the list, the biggest unsorted number "bubbles up" to its correct position.
-Keep going until the list is sorted: Keep repeating these steps until the whole list is sorted from smallest to largest.
-Finished: Once no more swaps are needed, the list is sorted, and you're done!
+Start with the 1st element
+Compare it with its adjacent numbers in sequence from left to right
+If the right number is greater than the left number, swap them, to make sure the right element is larger
+At the end of 1st iteration, the largest number of the list bubbles up to the right most index of the list
+Now, repeat the above process, and just that the iteration will not include the last element of the list which is already in its correct position
+In a manner of speaking, the iterations follow the below approach:
+n(n-1)(n-2)..... = n! => Time complexity is O(n!)
 """
 from typing import List
 
@@ -16,17 +16,17 @@ class BubbleSort:
     @staticmethod
     def ascending(input_list: List):
         for i in range(len(input_list) - 1, 0, -1):
-            for j in range(i):
-                if input_list[j] > input_list[j + 1]:
-                    temp = input_list[j]
-                    input_list[j] = input_list[j + 1]
-                    input_list[j + 1] = temp
+            for j in range(0, i):
+                if input_list[j + 1] < input_list[j]:
+                    tmp = input_list[j + 1]
+                    input_list[j + 1] = input_list[j]
+                    input_list[j] = tmp
         return input_list
 
     @staticmethod
     def descending(input_list: List):
         for i in range(len(input_list) - 1, 0, -1):
-            for j in range(i):
+            for j in range(0, i):
                 if input_list[j] < input_list[j + 1]:
                     temp = input_list[j]
                     input_list[j] = input_list[j + 1]
