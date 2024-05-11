@@ -51,8 +51,7 @@ def insertion_sort(my_list):
         print("current_element: ", current_element)
 
         j = i - 1
-        while my_list[j] > current_element and j >= 0:
-            print(my_list)
+        while current_element < my_list[j] and j >= 0:
             my_list[j + 1] = my_list[j]
             my_list[j] = current_element
             j -= 1
