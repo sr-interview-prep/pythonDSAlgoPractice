@@ -11,6 +11,7 @@ Compare current element to each of the left side elements of the list
     - If  current_element<left_element:
         left_element is moved to its right
         left_element=current_element
+        decrement the index of left_element to sort the left portion of the list
     - else: 
         break the loop
         this means
