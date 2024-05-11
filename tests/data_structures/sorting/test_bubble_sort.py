@@ -6,10 +6,18 @@ bubble_sort = BubbleSort()
 def test_bubble_sort_ascending():
     # best case
     input_list = [1, 2, 3, 4, 5, 6]
-    ascending_list = bubble_sort.sort(input_list=input_list)
-    assert ascending_list == sorted(input_list)
+    result = bubble_sort.sort(input_list=input_list)
+    assert result[0] == sorted(input_list)
+    assert result[1] == len(input_list) - 1
 
     # average case
     input_list = [2, 4, 5, 1, 3, 6]
-    ascending_list = bubble_sort.sort(input_list=input_list)
-    assert ascending_list == sorted(input_list)
+    result = bubble_sort.sort(input_list=input_list)
+    assert result[0] == sorted(input_list)
+    assert result[1] == 14
+
+    # worst case
+    input_list = [6, 5, 4, 3, 2, 1]
+    result = bubble_sort.sort(input_list=input_list)
+    assert result[0] == sorted(input_list)
+    assert result[1] == 15

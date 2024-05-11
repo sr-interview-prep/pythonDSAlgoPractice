@@ -9,7 +9,9 @@ Average Case: O(n^2) - Like bubble sort, selection sort also has nested loops, r
 Worst Case: O(n^2) - This occurs when the list is sorted in reverse order or nearly sorted, as it requires the maximum number of comparisons and swaps.
 
 
-This however, does lesser no. of swaps as compared to bubble sort so this is faster than bubble sort
+This however, does lesser no. of swaps as compared to bubble sort so this is faster than bubble sort for:
+- Longer lists
+- And Not best case scenarios
 """
 
 
