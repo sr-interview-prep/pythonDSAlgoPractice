@@ -1,12 +1,10 @@
 """
 Algorithm
 Start with the 1st element
-Compare it with its adjacent numbers in sequence from left to right
-If the right number is greater than the left number, swap them, to make sure the right element is larger
-At the end of 1st iteration, the largest number of the list bubbles up to the right most index of the list
-Now, repeat the above process, and just that the iteration will not include the last element of the list which is already in its correct position
-In a manner of speaking, the iterations follow the below approach:
-n(n-1)(n-2)..... = n! => Time complexity is O(n!)
+Check if the next element is less than the left element, if yes swap
+At the end of this iteration, the largest number bubbles up to the right most index of the list
+Now, repeat the process and go only until the penultimate element as the last element is already in its correct position
+So the time complexity of operations is n(n-1)(n-2).. = n!
 """
 from typing import List
 
