@@ -43,15 +43,11 @@ def swap(my_list, index1, index2):
 
 
 def find_pivot_and_partition(my_list, left_index, end_index):
-    # Function to find the pivot element and partition the array
-    print(my_list)
-
     pivot_value = my_list[left_index]
     possible_pivot_index = left_index
 
     for i in range(left_index + 1, end_index + 1):
         current_element = my_list[i]
-        print(f"Current element: {current_element}, Pivot value: {pivot_value}")
 
         if current_element < pivot_value:
             possible_pivot_index += 1
@@ -68,16 +64,13 @@ def find_pivot_and_partition(my_list, left_index, end_index):
 
 def quick_sort(my_list, left, right):
     # Recursive function to perform Quick Sort
-    print('\n')  # Print newline for clarity
-    print("left:", left)  # Print the left index
-    print("right:", right)  # Print the right index
     if left < right:
         # the below statements will make sure we use median element as the pivot index for best case scenario
         # pivot_index = (left + right) // 2
         # swap(my_list, pivot_index, left)
 
         pivot_index = find_pivot_and_partition(my_list, left, right)  # Find the pivot index and do the swapping
-        print("pivot_index:", pivot_index)  # Print the pivot index
+
         quick_sort(my_list, left, pivot_index - 1)  # Sort the left sub-array
         quick_sort(my_list, pivot_index + 1, right)  # Sort the right sub-array
     return my_list  # Return the sorted list
