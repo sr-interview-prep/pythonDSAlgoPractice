@@ -15,6 +15,13 @@ This however, does lesser no. of swaps as compared to bubble sort so this is fas
 """
 
 
+def swap(my_list, index_1, index_2):
+    tmp = my_list[index_1]
+    my_list[index_1] = my_list[index_2]
+    my_list[index_2] = tmp
+    return my_list
+
+
 def selection_sort(my_list):
     for i in range(0, len(my_list)):
         min_index = i
@@ -22,7 +29,5 @@ def selection_sort(my_list):
             if my_list[j] < my_list[min_index]:
                 min_index = j
         if i != min_index:  # the swap should take place only if the min index has changed
-            temp = my_list[i]
-            my_list[i] = my_list[min_index]
-            my_list[min_index] = temp
+            my_list = swap(my_list, i, min_index)
     return my_list
