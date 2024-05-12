@@ -28,6 +28,6 @@ def selection_sort(my_list):
         for j in range(i + 1, len(my_list)):
             if my_list[j] < my_list[min_index]:
                 min_index = j
-        if i != min_index:  # the swap should take place only if the min index has changed
+        if i != min_index:
             my_list = swap(my_list, i, min_index)
     return my_list
