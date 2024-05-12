@@ -28,24 +28,26 @@ Actual Calculation:
 from typing import List
 
 
+def swap(input_list, index_1, index_2):
+    temp = input_list[index_1]
+    input_list[index_1] = input_list[index_2]
+    input_list[index_2] = temp
+    return input_list
+
+
 class BubbleSort:
 
     @staticmethod
     def sort(input_list: List):
-        n = len(input_list)
         iterations = 0
+        n = len(input_list)
+        swap_flag = False
         for i in range(n - 1, 0, -1):
-            swapped = False  # Flag to track if any swaps occurred
             for j in range(i):
-                if input_list[j + 1] < input_list[j]:
-                    tmp = input_list[j + 1]
-                    input_list[j + 1] = input_list[j]
-                    input_list[j] = tmp
-                    swapped = True  # Set flag to True if a swap occurs
                 iterations += 1
-                print(input_list)
-            if not swapped:
-                # If no swaps occurred during this pass, the list is already sorted
+                if input_list[j + 1] < input_list[j]:
+                    swap_flag = True
+                    input_list = swap(input_list, j + 1, j)
+            if not swap_flag:
                 break
-        print(iterations)
         return input_list, iterations
