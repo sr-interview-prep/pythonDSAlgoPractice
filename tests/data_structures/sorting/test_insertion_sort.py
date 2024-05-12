@@ -1,4 +1,4 @@
-from data_structures.Sorting.InsertionSort import insertion_sort
+from data_structures.Sorting.InsertionSort.InsertionSort import insertion_sort
 
 
 def test_insertion_sort():
