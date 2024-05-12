@@ -49,19 +49,15 @@ Worst Case: O(n^2) - Occurs when the list is sorted in reverse order, and each e
 
 
 def insertion_sort(my_list):
-    print(my_list)
     iterations = 0
     for i in range(1, len(my_list)):
         current_element = my_list[i]
-        print("current_element: ", current_element)
-
         j = i - 1
+        print('current_element is :', current_element)
         while current_element < my_list[j] and j >= 0:
             my_list[j + 1] = my_list[j]
             my_list[j] = current_element
             j -= 1
             iterations += 1
-            
-        print(my_list)
         iterations += 1
     return my_list, iterations
