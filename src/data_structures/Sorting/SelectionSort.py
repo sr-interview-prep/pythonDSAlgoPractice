@@ -11,7 +11,7 @@ Worst Case: O(n^2) - This occurs when the list is sorted in reverse order or nea
 
 This however, does lesser no. of swaps as compared to bubble sort so this is faster than bubble sort for:
 - Longer lists
-- And Not best case scenarios
+- And Not for the best case scenarios as for that bubble sort has o(n) time complexity
 """
 
 
