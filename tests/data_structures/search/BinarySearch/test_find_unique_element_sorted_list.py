@@ -1,4 +1,5 @@
-from data_structures.Search.BinarySearch.FindUniqueElementSortedList import find_unique_element_sorted_list
+from data_structures.Search.BinarySearch.FindUniqueElementsSortedList.FindUniqueElementSortedList import \
+    find_unique_element_sorted_list
 
 
 def test_find_unique_element_sorted_list():
