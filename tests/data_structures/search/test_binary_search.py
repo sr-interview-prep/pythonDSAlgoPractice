@@ -1,4 +1,4 @@
-from data_structures.Search.BinarySearch import BinarySearch
+from data_structures.Search.BinarySearch.BinarySearch import BinarySearch
 
 
 def test_binary_search():
