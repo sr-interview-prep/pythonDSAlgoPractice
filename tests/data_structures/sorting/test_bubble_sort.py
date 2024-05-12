@@ -1,4 +1,4 @@
-from data_structures.Sorting.BubbleSort import BubbleSort
+from data_structures.Sorting.BubbleSort.BubbleSort import BubbleSort
 
 bubble_sort = BubbleSort()
 
