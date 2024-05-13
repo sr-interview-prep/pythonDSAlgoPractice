@@ -79,3 +79,6 @@ def quick_sort(my_list, left, right):
 def quick_sort_helper(my_list: List):
     # Helper function to call quick_sort with initial parameters
     return quick_sort(my_list, 0, len(my_list) - 1)  # Call quick_sort with left and right indices
+
+
+# check how to optimise this by taking mid element in the pivot 
