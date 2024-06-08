@@ -1,4 +1,4 @@
-# Eucliedean algorithm
+# Euclidean algorithm
 
 class GCD:
     def get_gcd(self, a: int, b: int) -> int:
