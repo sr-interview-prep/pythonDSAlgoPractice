@@ -1,6 +1,6 @@
 import pytest
 
-from popular_programs.strivers_sde_sheet.SetMatrixZero.set_matrix_zero import SetMatrixZero
+from popular_programs.strivers_sde_sheet.sde_sheet.SetMatrixZero.set_matrix_zero import SetMatrixZero
 
 
 @pytest.fixture
