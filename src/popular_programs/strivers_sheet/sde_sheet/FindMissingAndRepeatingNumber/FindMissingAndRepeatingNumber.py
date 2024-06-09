@@ -2,7 +2,11 @@ class FindMissingAndRepeatingNumber:
     def __init__(self, input_array):
         self.input_array = input_array
 
-    def dict_solution(self):
+    def hashing_approach(self):
+        """
+        Time Complexity: O(2N)
+        Space Complexity: O(1)
+        """
         repeating_number = -1
         missing_number = -1
 
@@ -22,3 +26,25 @@ class FindMissingAndRepeatingNumber:
                 break
             index += 1
         return {"missing_number": missing_number, "repeating_number": repeating_number}
+
+    # def mathematical_approach(self):
+    '''
+    Time Complexity: O(N)
+    Space Complexity: O(1)
+    
+    Sum(N) = Natural-Array 
+    Sum(N^2)= Natural-Array
+    
+    X-Y=val1
+    X^2-Y^2=val2
+    
+    Solve and get X, Y
+    X is the missing number
+    Y is the repeating number
+    
+    
+    '''
+
+    # def xor_gate_approach(self):
+    # https://takeuforward.org/data-structure/find-the-repeating-and-missing-numbers/
+    # Check Later
