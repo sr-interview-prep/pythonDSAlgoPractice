@@ -10,11 +10,17 @@ def test_missing_and_repeating_number():
     result = find_missing_and_repeating_number.hashing_approach()
     assert result == expected_output
 
+    result = find_missing_and_repeating_number.mathematical_approach()
+    assert result == expected_output
+
     # Test case 2
     input_array = [1, 2, 2, 4, 5]
     expected_output = {"missing_number": 3, "repeating_number": 2}
     find_missing_and_repeating_number = FindMissingAndRepeatingNumber(input_array=input_array)
     result = find_missing_and_repeating_number.hashing_approach()
+    assert result == expected_output
+
+    result = find_missing_and_repeating_number.mathematical_approach()
     assert result == expected_output
 
     # Test case 3
@@ -24,11 +30,17 @@ def test_missing_and_repeating_number():
     result = find_missing_and_repeating_number.hashing_approach()
     assert result == expected_output
 
+    result = find_missing_and_repeating_number.mathematical_approach()
+    assert result == expected_output
+
     # Test case 4
     input_array = [1, 1]
     expected_output = {"missing_number": 2, "repeating_number": 1}
     find_missing_and_repeating_number = FindMissingAndRepeatingNumber(input_array=input_array)
     result = find_missing_and_repeating_number.hashing_approach()
+    assert result == expected_output
+
+    result = find_missing_and_repeating_number.mathematical_approach()
     assert result == expected_output
 
     # Test case 5
@@ -46,4 +58,7 @@ def test_missing_and_repeating_number():
     expected_output = {"missing_number": 99, "repeating_number": 3}
     find_missing_and_repeating_number = FindMissingAndRepeatingNumber(input_array=input_array)
     result = find_missing_and_repeating_number.hashing_approach()
+    assert result == expected_output
+
+    result = find_missing_and_repeating_number.mathematical_approach()
     assert result == expected_output
