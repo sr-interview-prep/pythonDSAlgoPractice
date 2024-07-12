@@ -1,7 +1,7 @@
-'''
+"""
 With brute force it is O(n!)
 with back-tracking we can do in O(2^n)
-'''
+"""
 
 
 class QueensProblem:
@@ -13,7 +13,7 @@ class QueensProblem:
         if self.solve(0):
             self.print_queens()
         else:
-            print('There is no soltion for the problem')
+            print("There is no soltion for the problem")
 
     def solve(self, col_index):
         if col_index == self.n:

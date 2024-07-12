@@ -1,6 +1,6 @@
 # Write a Single linked list with the below functions
 """
-append, prepend, pop, pop_first, get, set_value, insert, remove,
+append, prepend, pop, pop_first, get, set_value, insert, remove, 
 print_list, reverse
 """
 
@@ -17,9 +17,6 @@ class LinkedList:
         self.head = new_node
         self.tail = new_node
         self.length = 1
-
-    def print_length(self):
-        print(self.length)
 
     def append(self, value):
         new_node = Node(value)
@@ -92,7 +89,7 @@ class LinkedList:
             return False
         if index == 0:
             return self.prepend(value)
-        if index == self.length:
+        if index == self.length - 1:
             return self.append(value)
         new_node = Node(value)
         before = self.get(index - 1)
