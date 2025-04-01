@@ -1,24 +1,23 @@
 def get_min_rotated_sorted_array(nums):
     """
     Algo
-    345,  6  ,712  -> Works
-    123,  4  ,567  -> Works
-
-    Get the sorted part of the array:
-        if mid<max then left is sorted but not right
-    Consider the sorted one as reference
-        if 1st element of sorted array > last element of unsorted array:
-            min value exist in the unsorted array (continue binary search in unsorted array)
-        else:
-            1st element of sorted array is the min element
+    Binary search
+    If mid < right:
+     - This is normal. Right portion is sorted
+     - The mid could be the minimum or be any given value
+        - In this case we search for the min on the left array by making the right index = mid
+    If mid > right:
+        The min element must be between mid and right
+        - left = mid + 1
+    At last the element at the left is the min value
     """
     left, right = 0, len(nums) - 1
     while left < right:
         mid = (left + right) // 2
-        if nums[mid] > nums[right]:
-            left = mid + 1
-        else:
+        if nums[mid] < nums[right]:
             right = mid
+        else:
+            left = mid + 1
     return nums[left]
 
 
