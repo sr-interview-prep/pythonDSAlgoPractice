@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="contiguous sum updates">
+    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="min in rotated sorted array">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blind75/contiguous_sum.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/blind75/contiguous_sum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/LinkedList/DoubleLinkedList.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/LinkedList/DoubleLinkedList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/LinkedList/Queues.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/LinkedList/Queues.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/Selection/QuickSelect.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/Selection/QuickSelect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort/MergeSort.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort/MergeSort.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +65,28 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.contiguous_sum">
+  <component name="RunManager" selected="Python.MergeSort">
+    <configuration name="MergeSort" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonDSAlgoPractice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort/MergeSort.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="contains_dupe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -147,27 +171,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for leetcode.arrays.test_unique_elements.test_unique_elements" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="pythonDSAlgoPractice" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;leetcode.arrays.test_unique_elements.test_unique_elements&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.contiguous_sum" />
-        <item itemvalue="Python.contains_dupe" />
-        <item itemvalue="Python.min_rotated_sorted_array" />
+        <item itemvalue="Python.MergeSort" />
         <item itemvalue="Python.twosum" />
-        <item itemvalue="Python tests.Python tests for leetcode.arrays.test_unique_elements.test_unique_elements" />
+        <item itemvalue="Python.contiguous_sum" />
+        <item itemvalue="Python.min_rotated_sorted_array" />
+        <item itemvalue="Python.contains_dupe" />
       </list>
     </recent_temporary>
   </component>
@@ -324,7 +334,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743494794409</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="contiguous sum updates">
+      <option name="closed" value="true" />
+      <created>1743498207366</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1743498207366</updated>
+    </task>
+    <task id="LOCAL-00020" summary="min in rotated sorted array">
+      <option name="closed" value="true" />
+      <created>1743499511017</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1743499511017</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -356,7 +382,8 @@
     <MESSAGE value="unique elements" />
     <MESSAGE value="adding minimum sorted array" />
     <MESSAGE value="contiguous sum updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="contiguous sum updates" />
+    <MESSAGE value="min in rotated sorted array" />
+    <option name="LAST_COMMIT_MESSAGE" value="min in rotated sorted array" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -377,14 +404,9 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/blind75/contiguous_sum.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/blind75/contiguous_sum.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="25" />
+          <url>file://$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort/MergeSort.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

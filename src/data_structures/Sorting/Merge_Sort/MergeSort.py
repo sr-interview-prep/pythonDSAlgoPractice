@@ -10,9 +10,8 @@ Therefore, o(nlogn) is the time complexity'''
 
 
 def merge(list1, list2):
+    i = j = 0
     combined = []
-    i = 0
-    j = 0
     while i < len(list1) and j < len(list2):
         if list1[i] < list2[j]:
             combined.append(list1[i])
@@ -29,10 +28,34 @@ def merge(list1, list2):
     return combined
 
 
-def merge_sort(my_list):
-    if len(my_list) == 1:
-        return my_list
-    mid = int(len(my_list) / 2)
-    left = my_list[:mid]
-    right = my_list[mid:]
+def merge_sort(nums):
+    if len(nums) == 0:
+        return []
+    if len(nums) == 1:
+        return nums
+    mid = len(nums) // 2
+    left = nums[:mid]
+    right = nums[mid:]
     return merge(merge_sort(left), merge_sort(right))
+
+
+if __name__ == "__main__":
+    # Test cases (input lists only)
+    test_cases = [
+        [],
+        [1],
+        [3, 2, 1],
+        [5, 3, 8, 6, 2, 7],
+        [10, -1, 2, 5, 0, 6, 4, -5],
+        [1, 2, 3, 4, 5],  # Already sorted
+        [5, 4, 3, 2, 1],  # Reverse sorted
+        [1, 3, 2, 5, 4],  # Alternating
+        [1, 1, 1, 1],  # All duplicates
+        [2, 1, 1, 3, 2]  # With duplicates
+    ]
+
+    for i, input_list in enumerate(test_cases):
+        expected = sorted(input_list)  # Compare with Python's built-in sorted
+        result = merge_sort(input_list)
+        assert result == expected, f"Test case {i + 1} failed: {input_list} got {result} expected {expected}"
+    print("All test cases passed!")
