@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="unique elements">
-      <change afterPath="$PROJECT_DIR$/src/blind75/contains_dupe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/blind75/contiguous_sum.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/blind75/min_rotated_sorted_array.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/blind75/twosum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonDSAlgoPractice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonDSAlgoPractice.iml" afterDir="false" />
+    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="adding minimum sorted array">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/currency_exchange_rate/solution.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/currency_exchange_rate/solution.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blind75/contains_dupe.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/blind75/contains_dupe.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +62,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.min_rotated_sorted_array">
+  <component name="RunManager" selected="Python.contains_dupe">
     <configuration name="contains_dupe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -169,8 +163,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.min_rotated_sorted_array" />
         <item itemvalue="Python.contains_dupe" />
+        <item itemvalue="Python.min_rotated_sorted_array" />
         <item itemvalue="Python.contiguous_sum" />
         <item itemvalue="Python.twosum" />
         <item itemvalue="Python tests.Python tests for leetcode.arrays.test_unique_elements.test_unique_elements" />
@@ -314,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714288001071</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="adding minimum sorted array">
+      <option name="closed" value="true" />
+      <created>1743185510038</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1743185510038</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -344,7 +346,8 @@
     <MESSAGE value="sorted square matrix" />
     <MESSAGE value="two sum" />
     <MESSAGE value="unique elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="unique elements" />
+    <MESSAGE value="adding minimum sorted array" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding minimum sorted array" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

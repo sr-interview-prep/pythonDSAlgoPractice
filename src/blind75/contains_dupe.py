@@ -1,10 +1,10 @@
 def is_contains_dupe(nums):
-    hash_map = {}
-    for i in range(len(nums)):
-        if nums[i] in hash_map:
-            return True
+    has_map = set()
+    for num in nums:
+        if num not in has_map:
+            has_map.add(num)
         else:
-            hash_map[nums[i]] = i
+            return True
     return False
 
 
