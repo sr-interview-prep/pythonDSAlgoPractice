@@ -16,4 +16,5 @@ def closest_numbers(arr):
             print(arr[k[0]], arr[k[1]])
 
 
-closest_numbers(arr=[6, 2, 4, 10])
+if __name__ == "__main__":
+    closest_numbers(arr=[6, 2, 4, 10])
