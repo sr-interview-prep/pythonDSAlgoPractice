@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="updating merge sort">
-      <change afterPath="$PROJECT_DIR$/sql/count_boudaries_v_ball_v_runs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/popular_programs/3rd_element_reordering.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_hr/closest_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_hr/closest_numbers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popular_programs/3rd_element_reordering.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/popular_programs/3rd_element_reordering.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
