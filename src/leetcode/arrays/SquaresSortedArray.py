@@ -17,18 +17,22 @@ from typing import List
 class SquaresSortedArray:
     def execute(self, nums: List[int]) -> List[int]:
 
-        l = 0
-        r = len(nums) - 1
+        n = len(nums)
+        result = [0] * n
+        left, right = 0, n - 1
+        pos = n - 1
 
-        result = []
-        while l <= r:
-            leftVal = nums[l] * nums[l]
-            rightVal = nums[r] * nums[r]
-            if leftVal >= rightVal:
-                result.insert(0, leftVal)
-                l += 1
+        while left <= right:
+            if abs(nums[left]) > abs(nums[right]):
+                result[pos] = nums[left] ** 2
+                left += 1
             else:
-                result.insert(0, rightVal)
-                r -= 1
+                result[pos] = nums[right] ** 2
+                right -= 1
+            pos -= 1
 
         return result
+
+
+if __name__ == "__main__":
+    print(SquaresSortedArray().execute([-4, -1, 0, 3, 10]))
