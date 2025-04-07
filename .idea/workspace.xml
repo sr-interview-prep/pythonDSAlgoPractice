@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="updating merge sort">
+    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="3rd element sorting">
+      <change afterPath="$PROJECT_DIR$/src/blind75/longest_palindrome_substring.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/blind75/max_profit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popular_programs/3rd_element_reordering.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/popular_programs/3rd_element_reordering.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,15 +41,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/suravichandran/Documents/ClientWork/repos/backend/pythonDSAlgoPractice&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/suravichandran/Documents/ClientWork/repos/backend/pythonDSAlgoPractice",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/popular_programs" />
@@ -62,7 +63,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.3rd_element_reordering">
+  <component name="RunManager" selected="Python.max_profit">
     <configuration name="3rd_element_reordering" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,7 +127,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="contiguous_sum" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="max_profit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -138,7 +139,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/blind75/contiguous_sum.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/blind75/max_profit.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -147,34 +148,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="twosum" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for max_profit.TestMaxProfit" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/blind75" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/blind75/twosum.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;max_profit.TestMaxProfit&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.max_profit" />
+        <item itemvalue="Python tests.Python tests for max_profit.TestMaxProfit" />
         <item itemvalue="Python.3rd_element_reordering" />
         <item itemvalue="Python.closest_numbers" />
         <item itemvalue="Python.MergeSort" />
-        <item itemvalue="Python.twosum" />
-        <item itemvalue="Python.contiguous_sum" />
       </list>
     </recent_temporary>
   </component>
@@ -355,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743504095646</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="3rd element sorting">
+      <option name="closed" value="true" />
+      <created>1743918702156</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1743918702156</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -389,7 +391,8 @@
     <MESSAGE value="contiguous sum updates" />
     <MESSAGE value="min in rotated sorted array" />
     <MESSAGE value="updating merge sort" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating merge sort" />
+    <MESSAGE value="3rd element sorting" />
+    <option name="LAST_COMMIT_MESSAGE" value="3rd element sorting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
