@@ -24,15 +24,34 @@ Output: false
 
 class ValidParenthesis:
     @staticmethod
-    def execute(s: str) -> bool:
-        dict_object = {'(': ')', '{': '}', '[': ']'}
+    def execute(st):
+        dic = {"(": ")", "{": "}", "[": "]"}
         stack = []
-        for i in s:
-            if i in dict_object:
+        for i in st:
+            if i in dic:
                 stack.append(i)
-            elif stack == [] or dict_object[stack.pop()] != i:
+            elif stack == []:
                 return False
-        if not stack:
+            elif dic[stack.pop()] != i:
+                return False
+        if stack == []:
             return True
         else:
             return False
+
+
+if __name__ == "__main__":
+    assert ValidParenthesis.execute("()") == True, "Test case 1 failed"
+    print("Test case 1 passed")
+
+    assert ValidParenthesis.execute("()[]{}") == True, "Test case 2 failed"
+    print("Test case 2 passed")
+
+    assert ValidParenthesis.execute("(]") == False, "Test case 3 failed"
+    print("Test case 3 passed")
+
+    assert ValidParenthesis.execute("([)]") == False, "Test case 4 failed"
+    print("Test case 4 passed")
+
+    assert ValidParenthesis.execute("{[]}") == True, "Test case 5 failed"
+    print("Test case 5 passed")

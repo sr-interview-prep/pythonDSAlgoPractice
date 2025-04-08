@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="longest palindromic substring">
-      <change afterPath="$PROJECT_DIR$/sql/recursive_cte.sql" afterDir="false" />
+    <list default="true" id="8677893c-bcfe-4ad3-97b8-daf942009d1f" name="Changes" comment="updating anagram problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_hr/closest_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_hr/closest_numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/Tree and Graph/BinarySearchTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/Tree and Graph/BinarySearchTree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/Tree and Graph/Graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/Tree and Graph/Graphs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetcode/arrays/MoveZeros.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetcode/arrays/MoveZeros.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetcode/arrays/ReverseString.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetcode/arrays/ReverseString.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetcode/arrays/SquaresSortedArray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetcode/arrays/SquaresSortedArray.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetcode/strings/ValidParenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetcode/strings/ValidParenthesis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +62,28 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.SquaresSortedArray">
+  <component name="RunManager" selected="Python.ValidParenthesis">
+    <configuration name="Anagram" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonDSAlgoPractice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/leetcode/strings" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/leetcode/strings/Anagram.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="BinarySearchTree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,7 +105,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Graphs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="ValidParenthesis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -98,11 +113,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/data_structures/Tree and Graph" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/leetcode/strings" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/data_structures/Tree and Graph/Graphs.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/leetcode/strings/ValidParenthesis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,76 +126,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="SquaresSortedArray" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for Anagram.TestAnagram" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/leetcode/arrays" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/leetcode/strings" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/leetcode/arrays/SquaresSortedArray.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;Anagram.TestAnagram&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="closest_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in Anagram.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="pythonDSAlgoPractice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_hr" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/leetcode/strings" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_hr/closest_numbers.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="max_profit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pythonDSAlgoPractice" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/blind75" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/blind75/max_profit.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/leetcode/strings/Anagram.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.SquaresSortedArray" />
-        <item itemvalue="Python.closest_numbers" />
+        <item itemvalue="Python.ValidParenthesis" />
+        <item itemvalue="Python.Anagram" />
+        <item itemvalue="Python tests.Python tests in Anagram.py" />
+        <item itemvalue="Python tests.Python tests for Anagram.TestAnagram" />
         <item itemvalue="Python.BinarySearchTree" />
-        <item itemvalue="Python.Graphs" />
-        <item itemvalue="Python.max_profit" />
       </list>
     </recent_temporary>
   </component>
@@ -377,7 +357,39 @@
       <option name="project" value="LOCAL" />
       <updated>1744009291744</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="updates">
+      <option name="closed" value="true" />
+      <created>1744028338368</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1744028338368</updated>
+    </task>
+    <task id="LOCAL-00025" summary="binary search tree">
+      <option name="closed" value="true" />
+      <created>1744090136890</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1744090136890</updated>
+    </task>
+    <task id="LOCAL-00026" summary="updates">
+      <option name="closed" value="true" />
+      <created>1744090144658</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1744090144658</updated>
+    </task>
+    <task id="LOCAL-00027" summary="updating anagram problem">
+      <option name="closed" value="true" />
+      <created>1744090721259</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1744090721259</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,7 +425,10 @@
     <MESSAGE value="updating merge sort" />
     <MESSAGE value="3rd element sorting" />
     <MESSAGE value="longest palindromic substring" />
-    <option name="LAST_COMMIT_MESSAGE" value="longest palindromic substring" />
+    <MESSAGE value="binary search tree" />
+    <MESSAGE value="updates" />
+    <MESSAGE value="updating anagram problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating anagram problem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -437,6 +452,16 @@
           <url>file://$PROJECT_DIR$/src/data_structures/Sorting/Merge_Sort/MergeSort.py</url>
           <line>41</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/popular_programs/strivers_sheet/sde_sheet/SubsetsUnique/SubsetsUnique.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/leetcode/strings/Anagram.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
