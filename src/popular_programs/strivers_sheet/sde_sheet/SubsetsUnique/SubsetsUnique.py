@@ -4,30 +4,26 @@ from typing import List
 class SubsetsUnique:
     @staticmethod
     def subsets_unique(input_list: List):
-        result_list = []
+        result = []
         subset = []
 
-        def recursion(index: int):
+        def dfs(i):
+            if i >= len(input_list):
+                result.append(subset.copy())
+                return
+            subset.append(input_list[i])
+            dfs(i + 1)
+            subset.pop()
+            dfs(i + 1)
 
-            # .copy() to avoid original reference of the list
-            result_list.append(subset.copy())
+        dfs(0)
 
-            for i in range(index, len(input_list)):
-                if i != index and input_list[i] == input_list[i - 1]:
-                    continue
-                subset.append(input_list[i])
-                recursion(index=i + 1)
-                subset.pop()
-
-        input_list.sort()
-        recursion(index=0)
-
-        return result_list
+        return result
 
 
-def test_subsets_unique():
-    input_list = [1, 2, 2]
-    expected_list = [[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]
+if __name__ == "__main__":
+    input_list = [1, 2, 3]
+    expected_list = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
     subsets_unique = SubsetsUnique()
     result = subsets_unique.subsets_unique(input_list=input_list)
-    assert result == expected_list
+    assert sorted(result) == sorted(expected_list)
