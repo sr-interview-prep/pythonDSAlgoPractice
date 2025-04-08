@@ -61,20 +61,20 @@ class BinarySearchTree:
 
     def BFS(self):
         queue = [self.root]
-        results = []
+        result = []
         while queue:
-            level_length = len(queue)
-            current_level = []
-            for _ in range(level_length):
+            no_elements_in_current_level = len(queue)
+            current_level_values = []
+            for _ in range(0, no_elements_in_current_level):
                 current_node = queue.pop(0)
-                current_level.append(current_node.value)
 
+                current_level_values.append(current_node.value)
                 if current_node.left:
                     queue.append(current_node.left)
                 if current_node.right:
                     queue.append(current_node.right)
-            results.append(current_level)
-        return results
+            result.append(current_level_values)
+        return result
 
     # preoder - push elements very 1st time when reached in the traversal
     # inorder - push elements 2nd time when reached in the traversal
