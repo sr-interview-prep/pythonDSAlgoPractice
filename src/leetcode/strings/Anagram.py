@@ -24,21 +24,48 @@ class Anagram:
     def is_anagram(self) -> bool:
         if len(self.base_str) != len(self.test_str):
             return False
-        frequency_s = {}
+        hash_map = {}
         for i in self.base_str:
-            if i not in frequency_s:
-                frequency_s[i] = 1
+            if i not in hash_map:
+                hash_map[i] = 1
             else:
-                frequency_s[i] += 1
-        frequency_t = {}
+                hash_map[i] += 1
+
         for i in self.test_str:
-            if i not in frequency_t:
-                frequency_t[i] = 1
-            else:
-                frequency_t[i] += 1
-
-        for i in frequency_s:
-            if frequency_s.get(i) != frequency_t.get(i):
+            if i not in hash_map:
                 return False
+            else:
+                hash_map[i] -= 1
+                if hash_map[i] == 0:
+                    hash_map.pop(i)
 
-        return True
+        if not hash_map:
+            return True
+
+
+if __name__ == "__main__":
+    anagram = Anagram("anagram", "nagaram")
+    assert (anagram.is_anagram()) == True
+    print("passed")
+    anagram = Anagram("rat", "car")
+    assert (anagram.is_anagram()) == False
+    print("passed")
+
+    #     def test_invalid_anagram(self):
+    #         anagram = Anagram("rat", "car")
+    #         self.assertFalse(anagram.is_anagram())
+    #
+    #     def test_empty_strings(self):
+    #         anagram = Anagram("", "")
+    #         self.assertTrue(anagram.is_anagram())
+    #
+    #     def test_different_lengths(self):
+    #         anagram = Anagram("a", "ab")
+    #         self.assertFalse(anagram.is_anagram())
+    #
+    #     def test_same_characters_different_counts(self):
+    #         anagram = Anagram("aabbcc", "abc")
+    #         self.assertFalse(anagram.is_anagram())
+    #
+    #
+    # unittest.main()
