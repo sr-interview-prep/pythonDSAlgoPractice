@@ -5,3 +5,6 @@ clear:
 
 test:
 	pytest tests --cov=src
+
+clean:
+	rm -rf *.o *.out *.exe build dist __pycache__ *.pyc
