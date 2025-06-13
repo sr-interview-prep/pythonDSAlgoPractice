@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Exercise List{% endblock %}
+{% block content %}
+  <h1>SQL Exercises</h1>
+  {% if exercises %}
+    <ul>
+      {% for exercise in exercises %}
+        <li><a href="#">{{ exercise }}</a></li> {# Link will be updated later #}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No exercises found.</p>
+  {% endif %}
+{% endblock %}

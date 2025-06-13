@@ -1,101 +1,154 @@
 # SQL Practice Platform
 
-This platform provides a local environment for practicing SQL queries using PostgreSQL. It includes a set of predefined exercises and allows for running ad-hoc SQL queries.
+This project provides a full-stack platform for practicing SQL queries, similar to a LeetCode-style environment. It features a PostgreSQL database, a FastAPI backend, and a React (TypeScript) frontend.
+
+## Features
+
+-   Dockerized PostgreSQL database with schema/data initialization.
+-   FastAPI backend providing RESTful APIs for:
+    -   Listing SQL exercises (problem description, solution template).
+    -   Executing user-submitted SQL queries against the database.
+-   React (TypeScript) frontend with Vite for:
+    -   Displaying exercise lists and problem descriptions (Markdown rendered).
+    -   A SQL editor area for users to write and submit queries.
+    -   Displaying query results (tables, messages, or errors).
+-   Organized structure for adding new SQL exercises.
+-   CORS configured for local development, allowing frontend and backend to communicate.
+
+## Project Structure
+
+```
+.
+├── backend/            # FastAPI backend application
+│   ├── main.py         # Main FastAPI application logic
+│   └── ...             # Other backend files (e.g., models, routers if refactored)
+├── exercises/          # SQL exercises, each in its own directory
+│   └── competition_winners/ # Example exercise
+│       ├── problem.md  # Problem description in Markdown
+│       └── solution.sql# Model solution SQL
+├── frontend/           # React TypeScript frontend application (Vite)
+│   ├── public/         # Static assets for the frontend
+│   ├── src/            # Frontend source code (components, App.tsx, etc.)
+│   ├── package.json    # Frontend dependencies and scripts
+│   ├── vite.config.ts  # Vite configuration
+│   └── tsconfig.json   # TypeScript configuration for frontend
+├── sql_init/           # Database initialization scripts
+│   └── init.sql        # SQL script to create tables and insert initial data
+├── .gitignore          # Specifies intentionally untracked files
+├── docker-compose.yml  # Docker configuration for the PostgreSQL service
+├── Dockerfile          # Dockerfile for PostgreSQL (official image is used, so this is minimal)
+├── README.md           # This file
+└── requirements.txt    # Python dependencies for the FastAPI backend
+```
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+-   **Docker & Docker Compose:** For running the PostgreSQL database.
+    -   Install Docker: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+    -   Install Docker Compose: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+-   **Python 3.8+ & pip:** For the FastAPI backend.
+    -   Install Python: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+-   **Node.js (LTS version recommended, e.g., 18.x or 20.x) & npm:** For the React frontend.
+    -   Install Node.js (includes npm): [https://nodejs.org/](https://nodejs.org/)
 
-*   **Docker and Docker Compose:** To run the PostgreSQL database container.
-    *   [Install Docker](https://docs.docker.com/get-docker/)
-    *   [Install Docker Compose](https://docs.docker.com/compose/install/)
-*   **Python 3.x and pip:** To run the helper scripts and install dependencies.
-    *   [Install Python](https://www.python.org/downloads/)
+## Setup and Running the Platform
 
-## Setup
+There are three main components to run: PostgreSQL Database, Backend API, and Frontend Application. Ensure Docker daemon is running before you start.
 
-Follow these steps to set up the environment:
+**1. Start the PostgreSQL Database:**
 
-1.  **Start the PostgreSQL Database:**
-    Open your terminal and navigate to the root directory of this project. Then run:
-    ```bash
-    docker-compose up -d postgres_db
-    ```
-    This command starts the PostgreSQL container in detached mode (`-d`). On the first run, Docker will pull the `postgres:latest` image. The database will be automatically initialized with any schemas and data defined in `sql_init/init.sql`.
+   Open your terminal and navigate to the project root directory. Run:
+   ```bash
+   docker-compose up -d postgres_db
+   ```
+   - This command starts the PostgreSQL container in detached mode (`-d`).
+   - On the first run, Docker will pull the `postgres:latest` image.
+   - The database is initialized with schemas and data from `sql_init/init.sql` on its first run or if the volume is cleared.
+   - **Database credentials** (used by the FastAPI backend):
+     - Host: `localhost` (from the perspective of your machine; `postgres_db` if services were in the same docker network)
+     - Port: `5432`
+     - User: `admin`
+     - Password: `admin`
+     - Database Name: `sqldb`
+   - Data is persisted in the `./postgres-data` directory (created by Docker Compose on your host machine).
 
-2.  **Install Python Dependencies:**
-    Install the necessary Python packages using pip and the `requirements.txt` file:
-    ```bash
-    pip install -r requirements.txt
-    ```
+**2. Start the FastAPI Backend:**
 
-## Running SQL Queries
+   In a new terminal window/tab, navigate to the project root directory:
+   ```bash
+   # Install/update Python dependencies (if you haven't already or if requirements.txt changed)
+   pip install -r requirements.txt
 
-The `run_sql.py` script is used to interact with the database and run exercises.
+   # Navigate to the backend directory
+   cd backend
 
-*   **Base command:** `python run_sql.py`
+   # Run the FastAPI development server using Uvicorn
+   # --reload enables auto-reload on code changes
+   # --port 8000 specifies the port (backend API configured to be accessible here)
+   uvicorn main:app --reload --port 8000
+   ```
+   - The backend API will be available at `http://localhost:8000`.
+   - You can explore the interactive API documentation (Swagger UI) at `http://localhost:8000/docs`.
+   - And alternative ReDoc documentation at `http://localhost:8000/redoc`.
 
-*   **List Available Exercises:**
-    To see a list of all available SQL exercises:
-    ```bash
-    python run_sql.py --list-exercises
-    ```
+**3. Start the React Frontend:**
 
-*   **Run a Specific Exercise:**
-    To run a particular exercise, use its name (which corresponds to the directory name under `exercises/`):
-    ```bash
-    python run_sql.py --exercise <exercise_name>
-    ```
-    For example:
-    ```bash
-    python run_sql.py --exercise competition_winners
-    ```
-    This will first display the problem description from `problem.md` and then execute the corresponding `solution.sql`, printing the results.
+   In another new terminal window/tab, navigate to the `frontend` directory:
+   ```bash
+   cd frontend
 
-*   **Run an Ad-hoc SQL Query String:**
-    You can execute a SQL query directly from the command line:
-    ```bash
-    python run_sql.py "SELECT * FROM STUDENTS;"
-    ```
-    Make sure to enclose your SQL query in quotes.
+   # Install frontend dependencies (if you haven't already or if package.json changed)
+   npm install
 
-*   **Run an SQL Query from a File:**
-    To execute a query stored in a `.sql` file:
-    ```bash
-    python run_sql.py --file path/to/your_query.sql
-    ```
+   # Start the Vite development server
+   npm run dev
+   ```
+   - The Vite development server will start, and your terminal output will show the URL where the frontend application is being served (typically `http://localhost:5173`).
+   - Open this URL in your web browser to use the SQL practice platform.
 
-## Database Details
+## Adding New SQL Exercises
 
-The PostgreSQL database is configured as follows:
+1.  **Create Exercise Directory:**
+    Create a new directory under `exercises/`. The name of this directory will be used as the exercise identifier (e.g., `exercises/my_new_sql_challenge/`).
 
-*   **Host:** `localhost`
-*   **Port:** `5432`
-*   **User:** `admin`
-*   **Password:** `admin`
-*   **Database Name:** `sqldb`
+2.  **Add Problem Description:**
+    Inside your new exercise directory, create a `problem.md` file. Describe the problem, the relevant table schemas, and the expected output or task using Markdown.
 
-These credentials are defined in the `docker-compose.yml` file. Database data is persisted in the `./postgres-data` directory on your host machine. This means your data will remain even if you stop and start the container, but not if you remove the volume (see below).
+3.  **Add Solution SQL:**
+    Also inside the exercise directory, create a `solution.sql` file. This file should contain the model SQL solution for the exercise. This solution will be fetched by the backend and can be used by the frontend (e.g., to pre-fill the SQL editor).
+
+4.  **Update Database Initialization (If Needed):**
+    If your new exercise requires new tables, views, or initial seed data that are not already part of `sql_init/init.sql`:
+    -   Add the necessary `CREATE TABLE ...;`, `INSERT INTO ...;`, etc., statements to the `sql_init/init.sql` file.
+    -   These statements will be executed by the PostgreSQL container when it's first created or after a full reset (see "Resetting the database" below). This ensures that the database schema and data are ready for your new exercise.
+    -   **Note:** The scripts in `/docker-entrypoint-initdb.d/` (where `sql_init/init.sql` is mounted) are executed in alphabetical order.
 
 ## Managing the Database Container
 
-You can manage the PostgreSQL container using `docker-compose` commands:
+These commands should be run from the project root directory where `docker-compose.yml` is located.
 
-*   **Stopping the container:**
-    To stop the running `postgres_db` service without removing its data:
+-   **Stopping the container:**
+    To stop the `postgres_db` service without removing its data:
     ```bash
     docker-compose stop postgres_db
     ```
+    To stop all services defined in `docker-compose.yml` (if more were added):
+    ```bash
+    docker-compose stop
+    ```
 
-*   **Viewing logs:**
+-   **Viewing logs:**
     To see the logs from the PostgreSQL container (useful for debugging initialization or runtime errors):
     ```bash
     docker-compose logs postgres_db
     ```
-    You can follow the logs in real-time using `docker-compose logs -f postgres_db`.
+    To follow the logs in real-time:
+    ```bash
+    docker-compose logs -f postgres_db
+    ```
 
-*   **Resetting the database (deletes all data!):**
-    If you want to completely reset the database, including all data, tables, and schemas defined in `init.sql`:
+-   **Resetting the database (deletes all data!):**
+    If you want to completely reset the database, which means all data in the `./postgres-data` volume will be deleted, and the `init.sql` script will run afresh on the next startup:
     1.  Stop and remove the container and its associated volume:
         ```bash
         docker-compose down -v
@@ -105,22 +158,6 @@ You can manage the PostgreSQL container using `docker-compose` commands:
         docker-compose up -d postgres_db
         ```
 
-## Adding New SQL Exercises
-
-To add a new SQL exercise to the platform:
-
-1.  **Create a Directory:**
-    Create a new directory for your exercise under the `exercises/` folder. The name of this directory will be used as `<exercise_name>`.
-    Example: `exercises/new_data_analysis_challenge/`
-
-2.  **Add Problem Description:**
-    Inside your new exercise directory, create a `problem.md` file. Describe the problem, the schema involved, and the expected output or task.
-
-3.  **Add Solution File:**
-    Also inside your new exercise directory, create a `solution.sql` file containing the model SQL solution for the problem.
-
-4.  **Update Initialization Script (if new schema/data is needed):**
-    If your new exercise requires new tables, views, or initial seed data:
-    *   Add the necessary `CREATE TABLE ...;`, `INSERT INTO ...;`, etc., statements to the `sql_init/init.sql` file.
-    *   These statements will be executed when the database is first created or after a reset (using `docker-compose down -v` and then `up`). This ensures the necessary database objects and data are available for your exercise.
-    *   **Important:** Try to make your DDL and DML statements idempotent if possible (e.g., using `CREATE TABLE IF NOT EXISTS`), though the `/docker-entrypoint-initdb.d/` mechanism in the postgres image typically runs scripts only once if the data directory is persisted and already initialized. A full reset (`docker-compose down -v`) guarantees a fresh run of all init scripts.
+---
+Happy SQL Practicing!
+```
