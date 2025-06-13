@@ -45,7 +45,7 @@ class QueryResult(BaseModel):
     message: Optional[str] = None
 
 # --- Database Configuration ---
-DB_HOST = "localhost"
+# DB_HOST will be determined dynamically based on environment
 DB_PORT = "5432"
 DB_USER = "admin"
 DB_PASS = "admin"
@@ -53,9 +53,10 @@ DB_NAME = "sqldb"
 
 # --- Helper Functions ---
 def get_db_connection():
+    db_host = "postgres_db" if os.getenv("RUNNING_IN_DOCKER") == "true" else "localhost"
     try:
         conn = psycopg2.connect(
-            host=DB_HOST,
+            host=db_host, # Use dynamically determined host
             port=DB_PORT,
             user=DB_USER,
             password=DB_PASS,
