@@ -4,9 +4,9 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file from the project root into the container at /app
+# Copy the local requirements file (backend/requirements.txt) into the container at /app
 # This assumes the Docker build context is the 'backend' directory.
-COPY ../requirements.txt .
+COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 # Using --no-cache-dir to reduce image size
