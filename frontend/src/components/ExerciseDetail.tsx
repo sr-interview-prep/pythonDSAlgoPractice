@@ -119,7 +119,7 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
       <div style={{ flexGrow: 1 }}> {/* This div will contain the SplitPane and allow it to take available space */}
         <SplitPane
           split="vertical" // or "horizontal"
-          initialSizes={[50, 50]} // Initial sizes of panes in percentage or pixels
+          sizes={[50, 50]} // Initial sizes of panes in percentage or pixels
         >
           {/* Problem Description Pane */}
           <div style={{ ...columnContentBoxStyle, marginRight: '5px' }}> {/* Added marginRight for gutter */}
