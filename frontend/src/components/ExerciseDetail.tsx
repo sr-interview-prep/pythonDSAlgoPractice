@@ -65,9 +65,9 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
         &larr; Back to Exercise List
       </button>
       <h2 style={{ margin: '30px 0 0 0', marginBottom: 0, textAlign: 'center' }}>{exercise.name}</h2>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', width: '100%', height: '100%', overflow: 'hidden', marginTop: '10px' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', width: '100%', height: '100%', overflow: 'hidden', marginTop: '10px', minWidth: 0 }}>
         {/* Left: Problem Description */}
-        <div style={{ flex: 1, borderRight: '1px solid #eee', padding: '24px 0 24px 24px', overflowY: 'auto', background: '#f9f9f9' }}>
+        <div style={{ flex: 1, borderRight: '1px solid #eee', padding: '16px 8px', overflowY: 'auto', background: '#f9f9f9', minWidth: 0 }}>
           <h3>Problem Description</h3>
           {exercise.problem_description ? (
             <ReactMarkdown>{exercise.problem_description}</ReactMarkdown>
@@ -76,7 +76,7 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
           )}
         </div>
         {/* Right: Code Editor and Query Result */}
-        <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', padding: '24px 24px 24px 0', overflow: 'hidden' }}>
+        <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', padding: '16px 8px', overflow: 'hidden', minWidth: 0 }}>
           <h3>Your SQL Query</h3>
           <p><em>(Solution SQL is pre-filled if available. You can modify it.)</em></p>
           <div style={{ flex: 1, minHeight: 0, marginBottom: '12px', position: 'relative' }}>
@@ -99,14 +99,10 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
                 quickSuggestions: true,
                 suggestOnTriggerCharacters: true,
                 tabCompletion: 'on',
-                // Enable find/search widget
                 find: {
                   addExtraSpaceOnTop: false,
-                  // seedSearchStringFromSelection: true, // boolean as required by Monaco Editor
-                  autoFindInSelection: 'always', // valid value for your Monaco Editor version
+                  autoFindInSelection: 'always',
                 },
-                // Enable VS Code keybindings (Monaco uses them by default)
-                // For more advanced keybinding customization, Monaco supports monaco.KeyMod and monaco.KeyCode
               }}
               theme="vs-dark"
             />
