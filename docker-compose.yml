@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:latest
+    container_name: postgres_db_container
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: sqldb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql_init:/docker-entrypoint-initdb.d # Mounts init scripts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d sqldb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s # Added start_period for initial startup
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_api_container
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000 (where Uvicorn runs)
+    # volumes:
+      # For development with live reload inside container:
+      # - ./backend:/app
+      # Ensure Dockerfile CMD uses --reload or override here.
+      # For production builds from Dockerfile, this volume mount is typically not used.
+    depends_on:
+      postgres_db:
+        condition: service_healthy # Wait for postgres_db to be healthy
+    environment:
+      # Example of how to pass DB connection info if backend is modified to use them:
+      # DB_HOST: postgres_db
+      # DB_PORT: 5432
+      # DB_USER: admin
+      # DB_PASSWORD: admin
+      # DB_NAME: sqldb
+      # Currently, backend/main.py uses hardcoded "localhost" for DB_HOST.
+      # This will need to be changed to "postgres_db" or use env vars
+      # when the backend runs in Docker and needs to connect to postgres_db service.
+      RUNNING_IN_DOCKER: "true" # Example flag to signal app it's in Docker
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_app_container
+    ports:
+      # Map host port 5173 (common for Vite dev) to container port 80 (Nginx default)
+      - "5173:80"
+    depends_on:
+      - backend # Ensures backend is started, though SPA might not strictly need it at build/launch
+    restart: unless-stopped
+
+volumes:
+  postgres_data: # Defines the named volume for PostgreSQL data persistence
+    # driver: local (default)
