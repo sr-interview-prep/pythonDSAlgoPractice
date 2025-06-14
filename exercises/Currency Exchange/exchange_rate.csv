@@ -1,0 +1,5 @@
+source_currency,target_currency,exchange_rate,effective_start_date
+EUR,USD,1.1,2023-01-01
+GBP,USD,1.25,2023-01-01
+EUR,USD,1.12,2023-01-03
+GBP,USD,1.28,2023-01-04

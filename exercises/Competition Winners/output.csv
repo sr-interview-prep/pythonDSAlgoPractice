@@ -1,0 +1,10 @@
+category,student_id,name,college_name,score
+Chemistry,2,Bob,CollegeB,88
+Chemistry,4,David,CollegeC,95
+Chemistry,8,Heidi,CollegeB,90
+Math,1,Alice,CollegeA,90
+Math,2,Bob,CollegeB,92
+Math,6,Frank,CollegeC,95
+Physics,1,Alice,CollegeA,85
+Physics,3,Charlie,CollegeA,90
+Physics,6,Frank,CollegeC,92

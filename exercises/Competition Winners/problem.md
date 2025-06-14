@@ -13,14 +13,20 @@ If there's a tie in scores, students should be ranked alphabetically by their co
 - `name` (VARCHAR): Name of the student.
 - `college_name` (VARCHAR): Name of the student's college.
 
+*Data for this table is provided in `students.csv`.*
+
 ### PARTICIPATIONS
 - `student_id` (INTEGER): Foreign key referencing STUDENTS(id).
 - `category` (VARCHAR): The category of the competition.
 - `score` (INTEGER): The score obtained by the student in that category.
 - PRIMARY KEY (`student_id`, `category`)
 
+*Data for this table is provided in `participations.csv`.*
+
 ## Task
 
 Write a SQL query to output the `category`, `student_id`, `name`, `college_name`, and `score`
 for the students who ranked in the top 3 of each `category`.
 The results should be ordered by `category`, then `student_id`, `name`, `college_name`, and `score`.
+
+The expected output format is defined in `output.csv`.
