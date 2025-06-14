@@ -1,8 +1,8 @@
-import React, { useState } from 'react'; // Removed useEffect as it's not used here directly
+import React, { useState } from 'react';
 import axios from 'axios';
 import ExerciseList from './components/ExerciseList';
-import ExerciseDetail from './components/ExerciseDetail'; // Corrected path if ExerciseDetail is in components
-import './App.css'; // Basic global styles
+import ExerciseDetail from './components/ExerciseDetail';
+import './App.css';
 
 // Define the Exercise structure (shared across components)
 export interface Exercise { // Exporting for potential use in other files if needed
@@ -21,6 +21,9 @@ export interface QueryResult { // Exporting for potential use
 
 const App: React.FC = () => {
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
+  const [panelWidths, setPanelWidths] = useState<{ left: number; right: number }>({ left: 50, right: 50 });
+  const [dragging, setDragging] = useState(false);
+
   // Current query result is managed within ExerciseDetail, App only provides the function to run query
 
   const handleSelectExercise = (exercise: Exercise) => {
@@ -63,22 +66,61 @@ const App: React.FC = () => {
     }
   };
 
+  // Drag handlers for resizable panels
+  const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    setDragging(true);
+    document.body.style.cursor = 'col-resize';
+  };
+  const handleDrag = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    const totalWidth = window.innerWidth;
+    const left = Math.max(20, Math.min(80, (e.clientX / totalWidth) * 100));
+    setPanelWidths({ left, right: 100 - left });
+  };
+  const handleDragEnd = () => {
+    setDragging(false);
+    document.body.style.cursor = '';
+  };
+  React.useEffect(() => {
+    if (!dragging) return;
+    const move = (e: MouseEvent) => handleDrag(e as any);
+    const up = () => handleDragEnd();
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+    return () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+  }, [dragging]);
+
   return (
-    <div className="App">
-      <header className="App-header" style={{ backgroundColor: '#282c34', padding: '20px', color: 'white', textAlign: 'center' }}>
-        <h1>SQL Practice Platform</h1>
+    <div className="App" style={{ minHeight: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
+      <header className="App-header" style={{ backgroundColor: '#282c34', padding: '20px 0', color: 'white', textAlign: 'center', width: '100%', margin: 0, boxSizing: 'border-box', alignSelf: 'stretch' }}>
+        <h1 style={{ margin: 0 }}>SQL Practice Platform</h1>
       </header>
-      <main style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+      <main style={{ flex: 1, width: '100%', margin: 0, padding: 0, display: 'flex', flexDirection: 'row', alignItems: 'stretch', justifyContent: 'stretch', gap: 0, minHeight: 0 }}>
         {selectedExercise ? (
-          <ExerciseDetail
-            exercise={selectedExercise}
-            onBackToList={handleBackToList}
-            onRunQuery={handleRunQuery}
-            // queryResult state is now managed within ExerciseDetail, so no need to pass it as prop from App
-          />
+          <>
+            <div style={{ flexBasis: `${panelWidths.left}%`, flexGrow: 0, flexShrink: 0, minWidth: 0, height: '100%' }}>
+              {/* Remove all maxWidth or centering from ExerciseDetail's container */}
+              <ExerciseDetail
+                exercise={selectedExercise}
+                onBackToList={handleBackToList}
+                onRunQuery={handleRunQuery}
+              />
+            </div>
+            <div
+              style={{ width: 6, cursor: 'col-resize', background: '#eee', zIndex: 10 }}
+              onMouseDown={handleDragStart}
+            />
+            <div style={{ flexBasis: `${panelWidths.right}%`, flexGrow: 1, flexShrink: 0, minWidth: 0, height: '100%' }}>
+              {/* The right panel is the code editor and results, already inside ExerciseDetail */}
+            </div>
+          </>
         ) : (
-          // ExerciseList fetches its own data as per its implementation
-          <ExerciseList onSelectExercise={handleSelectExercise} />
+          <div style={{ width: '100%', maxWidth: 1000, margin: '0 auto' }}>
+            <ExerciseList onSelectExercise={handleSelectExercise} />
+          </div>
         )}
       </main>
       <footer style={{ textAlign: 'center', padding: '20px', marginTop: '30px', borderTop: '1px solid #eee', color: '#777' }}>

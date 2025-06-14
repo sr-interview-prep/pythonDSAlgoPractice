@@ -1,0 +1,54 @@
+-- Database initialization script
+-- Define STUDENTS table
+CREATE TABLE STUDENTS (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255),
+    college_name VARCHAR(255)
+);
+
+-- Define PARTICIPATIONS table
+CREATE TABLE PARTICIPATIONS (
+    student_id INTEGER,
+    category VARCHAR(255),
+    score INTEGER,
+    PRIMARY KEY (student_id, category),
+    FOREIGN KEY (student_id) REFERENCES STUDENTS(id)
+);
+
+-- Insert sample data into STUDENTS
+INSERT INTO
+    STUDENTS (id, name, college_name)
+VALUES
+    (1, 'Alice Wonderland', 'State University'),
+    (2, 'Bob The Builder', 'City College'),
+    (3, 'Charlie Brown', 'State University'),
+    (4, 'Diana Prince', 'Tech Institute'),
+    (5, 'Eve Harrington', 'City College'),
+    (6, 'Frankenstein Monster', 'Tech Institute'),
+    (7, 'Grace Hopper', 'State University');
+
+-- Insert sample data into PARTICIPATIONS
+INSERT INTO
+    PARTICIPATIONS (student_id, category, score)
+VALUES
+    -- Category: Coding
+    (1, 'Coding', 95),
+    (2, 'Coding', 90),
+    (3, 'Coding', 95),
+    (4, 'Coding', 88),
+    (5, 'Coding', 70),
+    (6, 'Coding', 88),
+    -- Category: Debate
+    (1, 'Debate', 80),
+    (2, 'Debate', 85),
+    (3, 'Debate', 78),
+    (4, 'Debate', 92),
+    (5, 'Debate', 85),
+    (7, 'Debate', 92),
+    -- Category: Sports
+    (2, 'Sports', 60),
+    (3, 'Sports', 75),
+    (4, 'Sports', 85),
+    (5, 'Sports', 90),
+    (6, 'Sports', 85),
+    (7, 'Sports', 90);
