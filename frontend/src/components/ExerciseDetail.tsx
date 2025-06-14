@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown'; // Assuming this will be installed
+import ReactMarkdown from 'react-markdown';
+import Editor from '@monaco-editor/react';
 
 // Define the structure of an exercise object (can be shared or re-defined)
 interface Exercise {
@@ -78,20 +79,22 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
       <div>
         <h3>Your SQL Query</h3>
         <p><em>(Solution SQL is pre-filled if available. You can modify it.)</em></p>
-        <textarea
+        <Editor
+          height="300px"
+          defaultLanguage="sql"
           value={sqlQuery}
-          onChange={(e) => setSqlQuery(e.target.value)}
-          rows={10}
-          style={{
-            width: '100%',
-            boxSizing: 'border-box',
-            marginBottom: '10px',
-            padding: '8px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            fontFamily: 'monospace'
+          onChange={(value: string | undefined) => setSqlQuery(value || '')}
+          options={{
+            folding: true,
+            formatOnType: true,
+            formatOnPaste: true,
+            minimap: { enabled: false },
+            wordWrap: "on",
+            fontSize: 16,
+            fontFamily: 'monospace',
+            scrollBeyondLastLine: false,
+            automaticLayout: true,
           }}
-          placeholder="SELECT * FROM ..."
         />
         <button
           onClick={handleRunQuery}
