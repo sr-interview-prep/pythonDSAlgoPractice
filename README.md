@@ -10,7 +10,9 @@ This project provides a full-stack platform for practicing SQL queries, similar 
     -   Executing user-submitted SQL queries against the database.
 -   React (TypeScript) frontend with Vite for:
     -   Displaying exercise lists and problem descriptions (Markdown rendered).
-    -   A SQL editor area for users to write and submit queries.
+    -   Responsive side-by-side view for problem description and SQL editor.
+    -   Monaco-based SQL editor with syntax highlighting, code folding, and formatting.
+    -   Interactive results table with column sorting and global filtering (powered by TanStack Table).
     -   Displaying query results (tables, messages, or errors).
 -   Multi-container setup using Docker Compose for easy startup of all services.
 -   Organized structure for adding new SQL exercises.
@@ -24,6 +26,7 @@ This project provides a full-stack platform for practicing SQL queries, similar 
 ├── backend/                # FastAPI backend application
 │   ├── Dockerfile          # Dockerfile for the backend
 │   ├── main.py             # Main FastAPI application logic
+│   ├── requirements.txt    # Python dependencies for backend
 │   ├── tests/              # Backend unit tests
 │   │   └── test_main.py
 │   ├── __init__.py
@@ -39,7 +42,8 @@ This project provides a full-stack platform for practicing SQL queries, similar 
 │   ├── src/                # Frontend source code
 │   │   ├── components/     # React components
 │   │   │   ├── ExerciseDetail.tsx
-│   │   │   └── ExerciseList.tsx
+│   │   │   ├── ExerciseList.tsx
+│   │   │   └── QueryResultTable.tsx
 │   │   ├── App.tsx         # Main App component
 │   │   ├── App.test.tsx    # Unit tests for App component
 │   │   └── setupTests.ts   # Test setup for Vitest (e.g., jest-dom matchers)
@@ -52,8 +56,18 @@ This project provides a full-stack platform for practicing SQL queries, similar 
 ├── docker-compose.yml      # Docker Compose configuration for all services
 ├── Dockerfile              # Original Dockerfile for PostgreSQL (now unused, official image preferred)
 ├── README.md               # This file
-└── requirements.txt        # Python dependencies for the FastAPI backend
+└── requirements.txt        # Python dependencies for the FastAPI backend (project root, used for local dev)
 ```
+*(Note: `backend/requirements.txt` is used for the Docker build of the backend, while the root `requirements.txt` can be used for setting up a local backend dev environment.)*
+
+## Frontend Tech Stack Highlights
+- **Framework/Library:** React with TypeScript
+- **Build Tool:** Vite
+- **SQL Editor:** Monaco Editor
+- **Data Tables:** TanStack Table (React Table v8)
+- **HTTP Client:** Axios
+- **Markdown Rendering:** ReactMarkdown
+- **Testing:** Vitest, React Testing Library
 
 ## Prerequisites
 
@@ -75,7 +89,7 @@ This is the primary method to run the entire application (Database, Backend, Fro
     ```bash
     docker-compose up --build
     ```
-    -   `--build` forces Docker Compose to build the images for the backend and frontend services before starting them.
+    -   `--build` forces Docker Compose to build the images for the backend and frontend services before starting them. This is important after pulling new changes or when new dependencies are added.
     -   This command will start the PostgreSQL database, the FastAPI backend, and the Nginx server for the React frontend.
     -   You can add `-d` to run in detached mode (`docker-compose up --build -d`).
 
@@ -99,16 +113,30 @@ This setup is for when you want to actively develop the frontend or backend and 
 
 **B. Frontend Development (Vite Dev Server):**
    1.  Navigate to the frontend directory: `cd frontend`
-   2.  Install dependencies (if not already done): `npm install`
-   3.  Start the Vite development server: `npm run dev`
+   2.  Install/update frontend dependencies (IMPORTANT if new ones were added, like Monaco Editor or TanStack Table):
+       ```bash
+       npm install
+       ```
+   3.  Start the Vite development server:
+       ```bash
+       npm run dev
+       ```
    -   The frontend will typically be available at `http://localhost:5173`.
-   -   **API Connection:** The frontend (in `src/App.tsx`) is configured to connect to the backend API at `http://localhost:8000`. This will work if your backend (either local or Dockerized) is accessible on that port.
-       -   You can configure the API base URL in the frontend code if needed, or use a `.env` file with a variable like `VITE_API_BASE_URL=http://your_backend_url` and update `axios` calls to use `import.meta.env.VITE_API_BASE_URL`.
+   -   **API Connection:** The frontend (in `src/App.tsx`) is configured to connect to the backend API at `http://localhost:8000`. This will work if your backend (either local or Dockerized and port-mapped) is accessible on that port.
+       -   To configure a different API base URL, you can create a `.env` file in the `frontend/` directory (e.g., `frontend/.env`) with content like `VITE_API_BASE_URL=http://your_backend_url` and update `axios` calls in the code (e.g., `src/App.tsx`) to use `import.meta.env.VITE_API_BASE_URL`.
 
 **C. Backend Development (Uvicorn Dev Server):**
-   1.  Navigate to the backend directory: `cd backend`
-   2.  Install/update Python dependencies (if not already done): `pip install -r ../requirements.txt` (note the path to `requirements.txt` is from the `backend` directory).
-   3.  Run the FastAPI development server: `uvicorn main:app --reload --port 8000`
+   1.  Ensure you have a Python virtual environment activated (recommended).
+   2.  Install/update Python dependencies using the root `requirements.txt`:
+       ```bash
+       pip install -r requirements.txt
+       ```
+       (Run this from the project root, or adjust path if in `backend/` dir: `pip install -r ../requirements.txt`)
+   3.  Navigate to the backend directory: `cd backend`
+   4.  Run the FastAPI development server:
+       ```bash
+       uvicorn main:app --reload --port 8000
+       ```
    -   The backend API will be available at `http://localhost:8000`.
    -   It will connect to the PostgreSQL database running in Docker on `localhost:5432`. The `backend/main.py` script checks the `RUNNING_IN_DOCKER` environment variable (which is not set in this local setup) and correctly defaults to `localhost` for the database host.
 
@@ -123,35 +151,38 @@ This setup is for when you want to actively develop the frontend or backend and 
     -   Modify `sql_init/init.sql` to include any new `CREATE TABLE` or `INSERT INTO` statements.
     -   These scripts are executed when the `postgres_db` service starts for the first time or after its data volume is removed.
 3.  **Apply Changes:**
-    -   If you only added new exercise files in `exercises/` without changing `sql_init/init.sql`, and your backend/frontend are running via Docker Compose, you might need to restart the backend container to pick up new exercises, or if running locally, the Uvicorn server often reloads. The frontend will fetch the new list.
-    -   If you changed `sql_init/init.sql`, you must reset the database for the changes to apply:
+    -   If you only added new exercise files in `exercises/` without changing `sql_init/init.sql`:
+        -   If running via `docker-compose`, restart the backend service: `docker-compose restart backend` (or `docker-compose up -d --no-deps --build backend` if changes were in code).
+        -   If running locally, the Uvicorn server (with `--reload`) should pick up changes in `backend/` automatically.
+        -   The frontend will fetch the new list of exercises on its next load/refresh.
+    -   If you changed `sql_init/init.sql`, you **must reset the database** for the changes to apply:
         ```bash
-        docker-compose down -v postgres_db # Stops and removes the postgres container and its volume
-        docker-compose up -d postgres_db    # Restarts and reinitializes the database
-        # Or for all services: docker-compose down -v && docker-compose up --build -d
+        docker-compose down -v postgres_db # Stops and removes the postgres container AND its data volume
+        docker-compose up -d postgres_db    # Restarts and reinitializes the database using init.sql
+        # If all services are running: docker-compose down -v && docker-compose up --build -d
         ```
 
 ## Running Unit Tests
 
 **Backend Tests (pytest):**
-1.  Navigate to the backend directory: `cd backend`
-2.  Ensure Python dependencies, including `pytest`, are installed: `pip install -r ../requirements.txt`
+1.  Ensure Python dependencies, including `pytest`, are installed from `requirements.txt`.
+2.  Navigate to the backend directory: `cd backend`
 3.  Run tests: `pytest`
 
 **Frontend Tests (Vitest):**
 1.  Navigate to the frontend directory: `cd frontend`
 2.  Ensure Node.js dependencies are installed: `npm install`
-3.  Run tests: `npm test` (or `npm run test`)
+3.  Run tests: `npm test` (or `npm run test` as defined in `package.json`)
 
 ## Managing Docker Compose Services
 
 These commands should be run from the project root directory.
 
 -   **List running services:** `docker-compose ps`
--   **Stop all services:** `docker-compose stop` (to stop specific services: `docker-compose stop backend frontend`)
--   **Stop and remove containers:** `docker-compose down` (add `-v` to also remove volumes, e.g., `docker-compose down -v` for a full reset)
--   **View logs for all services:** `docker-compose logs -f`
--   **View logs for a specific service:** `docker-compose logs -f backend`
+-   **Stop all services:** `docker-compose stop` (to stop specific services: `docker-compose stop backend frontend postgres_db`)
+-   **Stop and remove containers:** `docker-compose down` (add `-v` to also remove named volumes like `postgres_data`, e.g., `docker-compose down -v` for a full reset of containers and data)
+-   **View logs for all services (follow):** `docker-compose logs -f`
+-   **View logs for a specific service (follow):** `docker-compose logs -f backend`
 
 ---
 Happy SQL Practicing!
