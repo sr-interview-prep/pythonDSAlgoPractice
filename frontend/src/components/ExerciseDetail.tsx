@@ -60,98 +60,115 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
   };
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '15px', margin: '10px', borderRadius: '5px' }}>
-      <button onClick={onBackToList} style={{ marginBottom: '15px', padding: '8px 12px' }}>
+    <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
+      <button onClick={onBackToList} style={{ margin: '15px 0 0 15px', padding: '8px 12px', alignSelf: 'flex-start', position: 'absolute', zIndex: 2 }}>
         &larr; Back to Exercise List
       </button>
-
-      <h2>{exercise.name}</h2>
-
-      <div style={{ border: '1px solid #eee', padding: '10px', marginBottom: '15px', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-        <h3>Problem Description</h3>
-        {exercise.problem_description ? (
-          <ReactMarkdown>{exercise.problem_description}</ReactMarkdown>
-        ) : (
-          <p>No problem description available.</p>
-        )}
-      </div>
-
-      <div>
-        <h3>Your SQL Query</h3>
-        <p><em>(Solution SQL is pre-filled if available. You can modify it.)</em></p>
-        <Editor
-          height="300px"
-          defaultLanguage="sql"
-          value={sqlQuery}
-          onChange={(value: string | undefined) => setSqlQuery(value || '')}
-          options={{
-            folding: true,
-            formatOnType: true,
-            formatOnPaste: true,
-            minimap: { enabled: false },
-            wordWrap: "on",
-            fontSize: 16,
-            fontFamily: 'monospace',
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-          }}
-        />
-        <button
-          onClick={handleRunQuery}
-          disabled={isRunningQuery || !sqlQuery.trim()}
-          style={{
-            padding: '10px 15px',
-            backgroundColor: isRunningQuery ? '#ccc' : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: isRunningQuery || !sqlQuery.trim() ? 'not-allowed' : 'pointer'
-          }}
-        >
-          {isRunningQuery ? 'Running...' : 'Run Query'}
-        </button>
-      </div>
-
-      {queryResult && (
-        <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '10px', backgroundColor: '#fdfdfd', borderRadius: '4px' }}>
-          <h3>Query Result</h3>
-          {queryResult.error && <pre style={{ color: 'red', whiteSpace: 'pre-wrap', backgroundColor: '#ffebee', padding: '10px', borderRadius: '4px' }}>Error: {queryResult.error}</pre>}
-          {queryResult.message && <p style={{ color: 'blue' }}>Message: {queryResult.message}</p>}
-          {queryResult.columns && queryResult.rows && (
-            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr>
-                    {queryResult.columns.map((col) => (
-                      <th key={col} style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', backgroundColor: '#f0f0f0' }}>
-                        {col}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {queryResult.rows.length === 0 && (
-                    <tr>
-                      <td colSpan={queryResult.columns.length} style={{ textAlign: 'center', padding: '10px' }}>
-                        Query executed successfully, but returned no rows.
-                      </td>
-                    </tr>
-                  )}
-                  {queryResult.rows.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      {row.map((cell, cellIndex) => (
-                        <td key={cellIndex} style={{ border: '1px solid #ddd', padding: '8px' }}>
-                          {String(cell === null ? "NULL" : cell)}
-                        </td>
+      <h2 style={{ margin: '30px 0 0 0', marginBottom: 0, textAlign: 'center' }}>{exercise.name}</h2>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', width: '100%', height: '100%', overflow: 'hidden', marginTop: '10px' }}>
+        {/* Left: Problem Description */}
+        <div style={{ flex: 1, borderRight: '1px solid #eee', padding: '24px 0 24px 24px', overflowY: 'auto', background: '#f9f9f9' }}>
+          <h3>Problem Description</h3>
+          {exercise.problem_description ? (
+            <ReactMarkdown>{exercise.problem_description}</ReactMarkdown>
+          ) : (
+            <p>No problem description available.</p>
+          )}
+        </div>
+        {/* Right: Code Editor and Query Result */}
+        <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', padding: '24px 24px 24px 0', overflow: 'hidden' }}>
+          <h3>Your SQL Query</h3>
+          <p><em>(Solution SQL is pre-filled if available. You can modify it.)</em></p>
+          <div style={{ flex: 1, minHeight: 0, marginBottom: '12px', position: 'relative' }}>
+            <Editor
+              height="100%"
+              defaultLanguage="sql"
+              value={sqlQuery}
+              onChange={(value: string | undefined) => setSqlQuery(value || '')}
+              options={{
+                folding: true,
+                formatOnType: true,
+                formatOnPaste: true,
+                minimap: { enabled: false },
+                wordWrap: "on",
+                fontSize: 16,
+                fontFamily: 'monospace',
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                contextmenu: true,
+                quickSuggestions: true,
+                suggestOnTriggerCharacters: true,
+                tabCompletion: 'on',
+                // Enable find/search widget
+                find: {
+                  addExtraSpaceOnTop: false,
+                  // seedSearchStringFromSelection: true, // boolean as required by Monaco Editor
+                  autoFindInSelection: 'always', // valid value for your Monaco Editor version
+                },
+                // Enable VS Code keybindings (Monaco uses them by default)
+                // For more advanced keybinding customization, Monaco supports monaco.KeyMod and monaco.KeyCode
+              }}
+              theme="vs-dark"
+            />
+          </div>
+          <button
+            onClick={handleRunQuery}
+            disabled={isRunningQuery || !sqlQuery.trim()}
+            style={{
+              padding: '10px 15px',
+              backgroundColor: isRunningQuery ? '#ccc' : '#28a745',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: isRunningQuery || !sqlQuery.trim() ? 'not-allowed' : 'pointer',
+              marginBottom: '16px',
+              alignSelf: 'flex-start'
+            }}
+          >
+            {isRunningQuery ? 'Running...' : 'Run Query'}
+          </button>
+          {queryResult && (
+            <div style={{ marginTop: '10px', border: '1px solid #ddd', padding: '10px', backgroundColor: '#fdfdfd', borderRadius: '4px', overflowY: 'auto', maxHeight: '40vh' }}>
+              <h3>Query Result</h3>
+              {queryResult.error && <pre style={{ color: 'red', whiteSpace: 'pre-wrap', backgroundColor: '#ffebee', padding: '10px', borderRadius: '4px' }}>Error: {queryResult.error}</pre>}
+              {queryResult.message && <p style={{ color: 'blue' }}>Message: {queryResult.message}</p>}
+              {queryResult.columns && queryResult.rows && (
+                <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <thead>
+                      <tr>
+                        {queryResult.columns.map((col) => (
+                          <th key={col} style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', backgroundColor: '#f0f0f0' }}>
+                            {col}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {queryResult.rows.length === 0 && (
+                        <tr>
+                          <td colSpan={queryResult.columns.length} style={{ textAlign: 'center', padding: '10px' }}>
+                            Query executed successfully, but returned no rows.
+                          </td>
+                        </tr>
+                      )}
+                      {queryResult.rows.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, cellIndex) => (
+                            <td key={cellIndex} style={{ border: '1px solid #ddd', padding: '8px' }}>
+                              {String(cell === null ? "NULL" : cell)}
+                            </td>
+                          ))}
+                        </tr>
                       ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
