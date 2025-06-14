@@ -182,10 +182,8 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
               </button>
             </div>
           </div>
-        </div>
-      </div>
-
-      </div>
+        </SplitPane> {/* Correctly closing SplitPane */}
+      </div> {/* Correctly closing the flexGrow div that wraps SplitPane */}
 
       {/* Query Result Section (remains below the SplitPane) */}
       {queryResult && (
