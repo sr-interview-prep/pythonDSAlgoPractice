@@ -61,8 +61,15 @@ const ExerciseList: React.FC<ExerciseListProps> = ({ onSelectExercise }) => {
   }
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '15px', margin: '10px', borderRadius: '5px' }}>
-      <h2>Available Exercises</h2>
+    <div style={{
+      border: '1px solid #ccc',
+      padding: '15px',
+      margin: '20px auto', // Changed margin for auto horizontal centering
+      borderRadius: '5px',
+      maxWidth: '600px',  // Added a max-width for the list container
+      boxSizing: 'border-box' // Explicitly ensure box-sizing, though inherited
+    }}>
+      <h2 style={{ marginTop: '0' }}>Available Exercises</h2> {/* Added marginTop: 0 to h2 */}
       <ul style={{ listStyleType: 'none', padding: 0 }}>
         {exercises.map((exercise) => (
           <li key={exercise.name} style={{ marginBottom: '10px' }}>

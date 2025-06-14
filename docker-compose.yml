@@ -28,8 +28,7 @@ services:
     container_name: backend_api_container
     ports:
       - "8000:8000" # Map host port 8000 to container port 8000 (where Uvicorn runs)
-    volumes:
-      - ./exercises:/exercises
+    # volumes:
       # For development with live reload inside container:
       # - ./backend:/app
       # Ensure Dockerfile CMD uses --reload or override here.
@@ -50,17 +49,17 @@ services:
       RUNNING_IN_DOCKER: "true" # Example flag to signal app it's in Docker
     restart: unless-stopped
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   container_name: frontend_app_container
-  #   ports:
-  #     # Map host port 5173 (common for Vite dev) to container port 80 (Nginx default)
-  #     - "5173:80"
-  #   depends_on:
-  #     - backend # Ensures backend is started, though SPA might not strictly need it at build/launch
-  #   restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_app_container
+    ports:
+      # Map host port 5173 (common for Vite dev) to container port 80 (Nginx default)
+      - "5173:80"
+    depends_on:
+      - backend # Ensures backend is started, though SPA might not strictly need it at build/launch
+    restart: unless-stopped
 
 volumes:
   postgres_data: # Defines the named volume for PostgreSQL data persistence

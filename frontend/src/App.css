@@ -1,10 +1,40 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 1280px; /* Max width of the overall app container */
+  margin: 0 auto; /* Center the app container */
+  padding: 0 1rem; /* Padding on the sides, no top/bottom padding as header/footer/main will handle it */
+  /* text-align: center; */ /* Removed: Let components decide their text alignment. */
+  display: flex; /* Use flexbox to manage layout of header, main, footer */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure #root also takes at least full viewport height */
 }
 
+/* App.tsx specific styles */
+.App {
+  /* This class is on the main div in App.tsx. */
+  /* We can add specific App layout styles here if needed, */
+  /* but most global layout is handled by #root, body, html */
+}
+
+.App-header {
+  /* Styles for the header in App.tsx */
+  /* Example: background-color: #282c34; padding: 20px; color: white; text-align: center; */
+  /* These are currently inline in App.tsx, can be moved here */
+  width: 100%; /* Ensure header spans full width of #root */
+}
+
+/* Main content area styling defined in App.tsx inline style is fine:
+   <main style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', flexGrow: 1 }}>
+   Adding 'flex-grow: 1' to the main content area if App is flex column
+   will make the main content take up available space, pushing footer down.
+*/
+
+/* Footer styling defined in App.tsx inline style is fine:
+   <footer style={{ textAlign: 'center', padding: '10px', marginTop: 'auto', borderTop: '1px solid #eee', color: '#777' }}>
+   Adding 'margin-top: auto' if App is flex column will push footer to bottom.
+*/
+
+
+/* Default Vite logo and card styles - can be kept, modified, or removed as needed */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -35,6 +65,10 @@
 
 .card {
   padding: 2em;
+  /* Example of a card style that might be used by components */
+  /* background-color: #fff; */ /* Assuming light mode for card example */
+  /* border-radius: 8px; */
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
 }
 
 .read-the-docs {
