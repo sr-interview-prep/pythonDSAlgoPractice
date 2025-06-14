@@ -28,7 +28,8 @@ services:
     container_name: backend_api_container
     ports:
       - "8000:8000" # Map host port 8000 to container port 8000 (where Uvicorn runs)
-    # volumes:
+    volumes:
+      - ./exercises:/exercises
       # For development with live reload inside container:
       # - ./backend:/app
       # Ensure Dockerfile CMD uses --reload or override here.

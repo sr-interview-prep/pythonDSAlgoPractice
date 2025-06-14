@@ -75,13 +75,16 @@ async def read_root():
 @app.get("/api/exercises", response_model=List[Exercise])
 async def list_exercises():
     exercises_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "exercises"))
+    print(f"[DEBUG] Resolved exercises_dir: {exercises_dir}")  # Debug print
 
     if not os.path.exists(exercises_dir) or not os.path.isdir(exercises_dir):
+        print("[DEBUG] exercises_dir does not exist or is not a directory.")  # Debug print
         return []
 
     exercise_list = []
     for exercise_name in sorted(os.listdir(exercises_dir)):
         exercise_path = os.path.join(exercises_dir, exercise_name)
+        print(f"[DEBUG] Checking {exercise_path}")  # Debug print
         if os.path.isdir(exercise_path):
             problem_md_path = os.path.join(exercise_path, "problem.md")
             solution_sql_path = os.path.join(exercise_path, "solution.sql")
@@ -102,6 +105,7 @@ async def list_exercises():
                 except Exception as e:
                     solution = f"Error reading solution SQL: {e}"
 
+            print(f"[DEBUG] Adding exercise: {exercise_name}")  # Debug print
             exercise_list.append(
                 Exercise(
                     name=exercise_name,
@@ -109,6 +113,9 @@ async def list_exercises():
                     solution_sql=solution,
                 )
             )
+        else:
+            print(f"[DEBUG] {exercise_path} is not a directory.")  # Debug print
+    print(f"[DEBUG] Total exercises found: {len(exercise_list)}")  # Debug print
     return exercise_list
 
 @app.post("/api/exercises/{exercise_name}/query", response_model=QueryResult)
