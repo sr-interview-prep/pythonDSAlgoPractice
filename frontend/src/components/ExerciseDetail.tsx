@@ -9,7 +9,15 @@ import {
   flexRender,
   ColumnDef,
   SortingState,
+  FilterFn,
 } from '@tanstack/react-table';
+
+// Custom filter for numbers (exact or partial match)
+const numberFilter: FilterFn<any> = (row, columnId, filterValue) => {
+  const cellValue = row.getValue(columnId);
+  if (filterValue === '') return true;
+  return String(cellValue).includes(filterValue);
+};
 
 // Define the structure of an exercise object (can be shared or re-defined)
 interface Exercise {
@@ -44,6 +52,41 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<any[]>([]);
 
+  const columns = useMemo<ColumnDef<any, any>[]>(() =>
+    queryResult && queryResult.columns
+      ? queryResult.columns.map((col) => {
+        // Use number filter for student_id and score columns
+        const isNumeric = ['student_id', 'score'].includes(col);
+        return {
+          accessorKey: col,
+          header: col,
+          cell: info => info.getValue(),
+          enableSorting: true,
+          enableColumnFilter: true,
+          filterFn: isNumeric ? numberFilter : undefined,
+        };
+      })
+      : [],
+    [queryResult]
+  );
+  const data = useMemo(() => (queryResult && queryResult.rows && queryResult.columns ? queryResult.rows.map((row: any[]) => {
+    const obj: Record<string, any> = {};
+    queryResult.columns.forEach((col: string, i: number) => { obj[col] = row[i]; });
+    return obj;
+  }) : []), [queryResult]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: { globalFilter, sorting, columnFilters },
+    onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
   // Effect to pre-fill sqlQuery with solution_sql when exercise changes
   useEffect(() => {
     if (exercise && exercise.solution_sql) {
@@ -72,36 +115,6 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
       setIsRunningQuery(false);
     }
   };
-
-  const columns = useMemo<ColumnDef<any, any>[]>(() =>
-    queryResult && queryResult.columns
-      ? queryResult.columns.map((col) => ({
-          accessorKey: col,
-          header: col,
-          cell: info => info.getValue(),
-          enableSorting: true,
-          enableColumnFilter: true,
-        }))
-      : [],
-    [queryResult]
-  );
-  const data = useMemo(() => (queryResult && queryResult.rows && queryResult.columns ? queryResult.rows.map((row: any[]) => {
-    const obj: Record<string, any> = {};
-    queryResult.columns.forEach((col: string, i: number) => { obj[col] = row[i]; });
-    return obj;
-  }) : []), [queryResult]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    state: { globalFilter, sorting, columnFilters },
-    onGlobalFilterChange: setGlobalFilter,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-  });
 
   return (
     <div style={{ width: '100%', height: '100%', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0 }}>
