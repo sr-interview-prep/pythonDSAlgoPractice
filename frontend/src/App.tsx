@@ -69,7 +69,7 @@ const App: React.FC = () => {
         <h1>SQL Practice Platform</h1>
       </header>
       {/* The <main> element will grow to fill available space, pushing the footer down */}
-      <main style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', flexGrow: 1, width: '100%' }}>
+      <main style={{ padding: '20px', margin: '0 auto', flexGrow: 1, width: '100%' }}>
         {selectedExercise ? (
           <ExerciseDetail
             exercise={selectedExercise}

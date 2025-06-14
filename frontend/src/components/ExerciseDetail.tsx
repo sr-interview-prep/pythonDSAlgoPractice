@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Editor, OnMount } from '@monaco-editor/react';
+import SplitPane from 'split-pane-react';
+import 'split-pane-react/esm/themes/default.css';
 import type monaco from 'monaco-editor';
+import { format } from 'sql-formatter-plus';
 import QueryResultTable from './QueryResultTable'; // Import the new table component
 
 interface Exercise {
@@ -62,24 +65,29 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
 
   const handleFormatSQL = () => {
     if (editorRef.current) {
-      editorRef.current.getAction('editor.action.formatDocument')?.run();
+      const currentValue = editorRef.current.getValue();
+      if (currentValue) {
+        try {
+          const formattedValue = format(currentValue, { language: 'sql' });
+          editorRef.current.setValue(formattedValue);
+        } catch (error) {
+          console.error("Error formatting SQL:", error);
+          // Optionally, display an error to the user in the UI
+          // For example, by setting a state variable and showing it near the editor
+        }
+      }
     }
   };
 
   // Styles
   const componentRootStyle: React.CSSProperties = {
     border: '1px solid #ccc', padding: '15px', margin: '10px auto',
-    borderRadius: '5px', maxWidth: '1200px'
+    borderRadius: '5px', display: 'flex', flexDirection: 'column', height: 'calc(100vh - 200px)' // Adjusted for header/footer
   };
-  const layoutContainerStyle: React.CSSProperties = {
-    display: 'flex', flexWrap: 'wrap', gap: '20px'
-  };
-  const columnStyle: React.CSSProperties = {
-    flex: '1 1 45%', minWidth: '300px', display: 'flex', flexDirection: 'column'
-  };
+  // Remove layoutContainerStyle and columnStyle as SplitPane will handle layout
   const columnContentBoxStyle: React.CSSProperties = {
     border: '1px solid #eee', padding: '10px', backgroundColor: '#f9f9f9',
-    borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column'
+    borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column', overflow: 'auto'
   };
   const editorWrapperStyle: React.CSSProperties = {
     flexGrow: 1, border: '1px solid #ccc', borderRadius: '4px', overflow: 'hidden'
@@ -106,12 +114,15 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
         &larr; Back to Exercise List
       </button>
 
-      <h2 style={{ marginTop: 0, marginBottom: '20px' }}>{exercise.name}</h2>
+      <h2 style={{ marginTop: 0, marginBottom: '20px', flexShrink: 0 }}>{exercise.name}</h2>
 
-      <div style={layoutContainerStyle}>
-
-        <div style={columnStyle}> {/* Problem Description Column */}
-          <div style={columnContentBoxStyle}>
+      <div style={{ flexGrow: 1 }}> {/* This div will contain the SplitPane and allow it to take available space */}
+        <SplitPane
+          split="vertical" // or "horizontal"
+          initialSizes={[50, 50]} // Initial sizes of panes in percentage or pixels
+        >
+          {/* Problem Description Pane */}
+          <div style={{ ...columnContentBoxStyle, marginRight: '5px' }}> {/* Added marginRight for gutter */}
             <h3 style={{marginTop: 0, marginBottom: '10px'}}>Problem Description</h3>
             <div style={{ flexGrow: 1, overflowY: 'auto' }}>
               {exercise.problem_description ? (
@@ -121,10 +132,9 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
               )}
             </div>
           </div>
-        </div>
 
-        <div style={columnStyle}> {/* SQL Editor Column */}
-          <div style={columnContentBoxStyle}>
+          {/* SQL Editor Pane */}
+          <div style={{ ...columnContentBoxStyle, marginLeft: '5px' }}> {/* Added marginLeft for gutter */}
             <h3 style={{marginTop: 0, marginBottom: '5px'}}>Your SQL Query</h3>
             <p style={{fontSize: '0.9em', color: '#555', marginTop: '0', marginBottom: '10px'}}>
               <em>(Solution SQL is pre-filled if available. You can modify it.)</em>
@@ -144,11 +154,16 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
                   fontSize: 14,
                   wordWrap: 'on',
                   automaticLayout: true,
-                  // folding: true, // Example: enable folding
-                  // tabSize: 2,   // Example: set tab size
+                  folding: true, // Ensure folding is enabled
+                  showFoldingControls: 'mouseover', // Show folding controls on mouseover
+                  multiCursorModifier: 'alt', // Use Alt+Click for multicursor
+                  // find: { addExtraSpaceOnTop: false } // Example, if specific find widget customization is needed
                 }}
               />
             </div>
+            <p style={{ fontSize: '0.8em', color: '#666', marginTop: '5px', textAlign: 'center' }}>
+              Tip: Editor supports multi-cursor (Alt+Click), search (Ctrl+F), folding, and more.
+            </p>
             <div style={buttonContainerStyle}>
               <button
                 onClick={handleFormatSQL}
@@ -170,10 +185,11 @@ const ExerciseDetail: React.FC<ExerciseDetailProps> = ({ exercise, onBackToList,
         </div>
       </div>
 
-      {/* Query Result Section (remains below the two columns) */}
+      </div>
+
+      {/* Query Result Section (remains below the SplitPane) */}
       {queryResult && (
-        <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '10px', backgroundColor: '#fdfdfd', borderRadius: '4px' }}>
-          <h3 style={{marginTop: 0}}>Query Result</h3>
+        <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '10px', backgroundColor: '#fdfdfd', borderRadius: '4px', flexShrink: 0 }}>
           <h3 style={{marginTop: 0}}>Query Result</h3>
           {queryResult.error && <pre style={{ color: 'red', whiteSpace: 'pre-wrap', backgroundColor: '#ffebee', padding: '10px', borderRadius: '4px' }}>Error: {queryResult.error}</pre>}
           {queryResult.message && <p style={{ color: 'blue' }}>Message: {queryResult.message}</p>}

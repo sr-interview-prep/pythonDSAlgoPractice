@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px; /* Max width of the overall app container */
   margin: 0 auto; /* Center the app container */
   padding: 0 1rem; /* Padding on the sides, no top/bottom padding as header/footer/main will handle it */
   /* text-align: center; */ /* Removed: Let components decide their text alignment. */
