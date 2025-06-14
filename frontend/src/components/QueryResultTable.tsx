@@ -161,14 +161,29 @@ const QueryResultTable: React.FC<QueryResultTableProps> = ({ data, columnNames }
 
   return (
     <> {/* Fragment to hold filter input and table */}
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
         <input
           type="text"
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search all columns..."
-          style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px', width: '100%', maxWidth: '400px' }}
+          style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px', flexGrow: 1, maxWidth: '400px' }}
         />
+        <button
+          onClick={() => {
+            table.resetColumnFilters(true); // true to reset faceted values as well
+            table.setGlobalFilter('');    // Clear global filter
+          }}
+          style={{
+            padding: '8px 12px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            backgroundColor: '#f0f0f0',
+            cursor: 'pointer',
+          }}
+        >
+          Reset Filters
+        </button>
       </div>
 
       <div style={{ width: '100%', overflowX: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
