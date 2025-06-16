@@ -1,12 +1,11 @@
 def max_contiguous_sum(nums):
     if not nums:
         return 0
-    current_sum = max_sum = nums[0]
-    for i in range(1, len(nums)):
-        current_sum = max(nums[i], current_sum + nums[i])
-        max_sum = max(current_sum, max_sum)
+    current_sum=max_sum=nums[0]
+    for i in range(1,len(nums)):
+        current_sum=max(nums[i],current_sum+nums[i])
+        max_sum=max(current_sum,max_sum)
     return max_sum
-
 
 if __name__ == "__main__":
     # Basic tests for contiguous sum
