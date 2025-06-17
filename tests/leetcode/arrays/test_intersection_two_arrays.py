@@ -1,4 +1,4 @@
-from leetcode.arrays.IntersectionOfTwoArrays import IntersectionOfTwoArrays
+from leetcode.arrays.ArrayMinus import IntersectionOfTwoArrays
 
 
 def test_intersection_two_arrays():
