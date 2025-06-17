@@ -8,12 +8,12 @@ def max_profit_sell_multiple_times(prices: list):
     """
     if not prices:
         return 0
-
-    total_profit = 0
-    for i in range(1, len(prices)):
-        if prices[i] > prices[i - 1]:
-            total_profit += prices[i] - prices[i - 1]
-    return total_profit
+    max_profit=0
+    for i in range(1,len(prices)):
+        if prices[i]>prices[i-1]:
+            profit=prices[i]-prices[i-1]
+            max_profit+=profit
+    return max_profit            
 
 if __name__ == "__main__":
     # Test cases: (input, expected_output)
