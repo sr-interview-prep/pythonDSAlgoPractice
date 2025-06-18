@@ -1,4 +1,4 @@
-from leetcode.arrays.MaxSubArray import MaxSubArray
+from current_learning.kadanes_algo.max_sub_array import MaxSubArray
 
 
 def test_max_sub_array():
