@@ -11,16 +11,26 @@ Intuition:
 from typing import List
 
 def array_minus(nums1: List[int], nums2: List[int]) -> List[int]:
-    count = {}
-    result = []
+    hash_map={}
+    result=[]
     for num in nums2:
-        count[num] = count.get(num, 0) + 1
-    for num in nums1:
-        if count.get(num, 0) > 0:
-            count[num] -= 1  # Remove one occurrence
+        if num not in hash_map:
+            hash_map[num]=1
         else:
-            result.append(num)
+            hash_map[num]+=1
+    for num in nums1:
+        if num not in hash_map:
+            result.append(num) 
+        else:
+            hash_map[num]-=1        
+            if hash_map[num]==0:
+                hash_map.pop(num)
     return result
+            
+        
+        
+        
+
 
 if __name__ == "__main__":
     # Test cases with assertions
