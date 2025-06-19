@@ -12,15 +12,22 @@ Intuition:
 from typing import List
 
 def intersect(nums1: List[int], nums2: List[int]) -> List[int]:
-    count = {}
-    result = []
+    result=[]
+    hash_map={}
     for num in nums1:
-        count[num] = count.get(num, 0) + 1
+        if num not in hash_map:
+            hash_map[num]=1
+        else:
+            hash_map[num]+=1
     for num in nums2:
-        if count.get(num, 0) > 0:
-            result.append(num)
-            count[num] -= 1
+        if num in hash_map:
+            if hash_map[num]==0:
+                hash_map.pop(num)
+            else:
+                hash_map[num]-=1
+                result.append(num)
     return result
+            
 
 if __name__ == "__main__":
     # Test cases with assertions
