@@ -10,23 +10,21 @@ Intuition:
 - This approach is optimal: O(n + m) time and O(min(n, m)) space.
 """
 from typing import List
-
 def intersect(nums1: List[int], nums2: List[int]) -> List[int]:
     result=[]
     hash_map={}
     for num in nums1:
-        if num not in hash_map:
-            hash_map[num]=1
-        else:
-            hash_map[num]+=1
+        hash_map[num]=hash_map.get(num,0)+1
+        
     for num in nums2:
         if num in hash_map:
             result.append(num)
-            hash_map[num] -= 1
-            if hash_map[num] == 0:
+            hash_map[num]-=1
+            if hash_map[num]==0:
                 hash_map.pop(num)
+                
     return result
-            
+        
 
 if __name__ == "__main__":
     # Test cases with assertions
