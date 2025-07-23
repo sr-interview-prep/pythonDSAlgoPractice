@@ -1,9 +1,8 @@
-# this is a commit from code sandbox
 def is_contains_dupe(nums):
     has_map = set()
     for num in nums:
         if num not in has_map:
-            has_map.add(num)
+            has_map.add(num)            
         else:
             return True
     return False
