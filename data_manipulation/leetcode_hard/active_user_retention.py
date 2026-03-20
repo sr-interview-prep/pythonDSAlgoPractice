@@ -33,8 +33,3 @@ def active_user_retention(user_actions_df):
     )
     return result_df
 
-
-if __name__ == "__main__":
-    spark = SparkSession.builder.getOrCreate()
-    user_actions = spark.table("user_actions")
-    active_user_retention(user_actions).show()
