@@ -26,8 +26,8 @@ test:
 
 clean:
 	rm -rf "__pycache__" ".pytest_cache" "metastore_db" "spark-warehouse" "derby.log"
-	rm -rf sql_pyspark/**/__pycache__
-	rm -rf data_manipulation/**/__pycache__
+	rm -rf sql_pyspark/**/**/__pycache__
+	rm -rf data_manipulation/**/**/__pycache__
 
 test-all:
 	$(PYTHON) "$(RUNNER)" --all

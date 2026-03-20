@@ -1,0 +1,22 @@
+{
+  "tables": {
+    "daily_sales": {
+      "schema": {
+        "sale_date": "date",
+        "revenue": "int"
+      },
+      "rows": [
+        {"sale_date": "2022-01-01", "revenue": 100},
+        {"sale_date": "2022-01-02", "revenue": 130},
+        {"sale_date": "2022-01-03", "revenue": 125},
+        {"sale_date": "2022-01-04", "revenue": 140}
+      ]
+    }
+  },
+  "expected": [
+    {"sale_date": "2022-01-01", "revenue": 100, "revenue_delta": null},
+    {"sale_date": "2022-01-02", "revenue": 130, "revenue_delta": 30},
+    {"sale_date": "2022-01-03", "revenue": 125, "revenue_delta": -5}
+  ],
+  "sort_by": ["sale_date"]
+}
