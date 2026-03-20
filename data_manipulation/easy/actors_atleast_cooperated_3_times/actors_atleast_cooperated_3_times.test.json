@@ -1,0 +1,33 @@
+{
+  "tables": {
+    "actordirector": {
+      "schema": {
+        "actor_id": "int",
+        "director_id": "int",
+        "timestamp": "int"
+      },
+      "rows": [
+        {"actor_id": 1, "director_id": 10, "timestamp": 1},
+        {"actor_id": 1, "director_id": 10, "timestamp": 2},
+        {"actor_id": 1, "director_id": 10, "timestamp": 3},
+        {"actor_id": 1, "director_id": 20, "timestamp": 4},
+        {"actor_id": 1, "director_id": 20, "timestamp": 5},
+        {"actor_id": 2, "director_id": 10, "timestamp": 6},
+        {"actor_id": 2, "director_id": 10, "timestamp": 7},
+        {"actor_id": 2, "director_id": 10, "timestamp": 8},
+        {"actor_id": 2, "director_id": 10, "timestamp": 9},
+        {"actor_id": 3, "director_id": 30, "timestamp": 10},
+        {"actor_id": 3, "director_id": 30, "timestamp": 11},
+        {"actor_id": 4, "director_id": 40, "timestamp": 12},
+        {"actor_id": 4, "director_id": 40, "timestamp": 13},
+        {"actor_id": 4, "director_id": 40, "timestamp": 14}
+      ]
+    }
+  },
+  "expected": [
+    {"actor_id": 1, "director_id": 10},
+    {"actor_id": 2, "director_id": 10},
+    {"actor_id": 4, "director_id": 40}
+  ],
+  "sort_by": ["actor_id", "director_id"]
+}
