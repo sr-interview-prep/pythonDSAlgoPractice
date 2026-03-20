@@ -1,6 +1,5 @@
 from pyspark.sql import SparkSession, functions as F
 
-
 def active_user_retention(user_actions_df):
     # m CTE: monthly activity for selected engagement event types.
     m_df = (

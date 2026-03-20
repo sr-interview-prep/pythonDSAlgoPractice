@@ -1,0 +1,25 @@
+{
+  "tables": {
+    "user_actions": {
+      "schema": {
+        "user_id": "int",
+        "event_date": "date",
+        "event_type": "string"
+      },
+      "rows": [
+        {"user_id": 1, "event_date": "2022-06-15", "event_type": "sign-in"},
+        {"user_id": 1, "event_date": "2022-07-10", "event_type": "like"},
+        {"user_id": 1, "event_date": "2022-07-11", "event_type": "comment"},
+        {"user_id": 2, "event_date": "2022-06-20", "event_type": "comment"},
+        {"user_id": 2, "event_date": "2022-07-05", "event_type": "sign-in"},
+        {"user_id": 3, "event_date": "2022-07-09", "event_type": "like"},
+        {"user_id": 4, "event_date": "2022-06-01", "event_type": "purchase"},
+        {"user_id": 4, "event_date": "2022-07-02", "event_type": "sign-in"}
+      ]
+    }
+  },
+  "expected": [
+    {"mth": 7, "monthly_active_users": 2}
+  ],
+  "sort_by": ["mth"]
+}
