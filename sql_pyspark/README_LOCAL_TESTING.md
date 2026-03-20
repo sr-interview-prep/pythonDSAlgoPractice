@@ -83,6 +83,19 @@ Clean local Spark/Python test artifacts:
 make clean
 ```
 
+## VS Code Extension Shortcuts
+
+Build and install extension from repo root:
+
+```bash
+make ext-build
+make ext-install
+```
+
+After install:
+- `Cmd+Alt+T`: run test for current file in `sql_pyspark`
+- `Cmd+Alt+Shift+T`: run all tests
+
 Run all test cases:
 
 ```bash

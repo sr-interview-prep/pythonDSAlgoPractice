@@ -1,0 +1,70 @@
+{
+  "name": "sql-pyspark-test-runner",
+  "displayName": "SQL PySpark Test Runner",
+  "description": "Run local sql_pyspark parity tests using make commands.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:sqlPysparkTests.runForCurrentFile",
+    "onCommand:sqlPysparkTests.runAll"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sqlPysparkTests.runForCurrentFile",
+        "title": "SQL PySpark: Test Current File"
+      },
+      {
+        "command": "sqlPysparkTests.runAll",
+        "title": "SQL PySpark: Test All Cases"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "sqlPysparkTests.runForCurrentFile",
+        "key": "cmd+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "sqlPysparkTests.runForCurrentFile",
+        "key": "cmd+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "sqlPysparkTests.runAll",
+        "key": "cmd+alt+shift+t",
+        "mac": "cmd+alt+shift+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "sqlPysparkTests.runAll",
+        "key": "cmd+shift+alt+r",
+        "mac": "cmd+shift+alt+r",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npm run compile && vsce package --no-dependencies"
+  },
+  "overrides": {
+    "cheerio": "1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "2.15.0",
+    "typescript": "^5.4.5"
+  }
+}
