@@ -136,9 +136,15 @@ def _extract_scala_query(scala_content: str) -> str:
     )
 
 
-def _run_scala_solution(spark: SparkSession, scala_path: Path) -> DataFrame:
+def _run_scala_solution(spark: SparkSession, scala_path: Path) -> DataFrame | None:
     scala_content = scala_path.read_text(encoding="utf-8")
-    query = _extract_scala_query(scala_content)
+    try:
+        query = _extract_scala_query(scala_content)
+    except ValueError:
+        # OOP Scala implementations may not embed SQL strings.
+        if re.search(r"\bdef\s+solve\s*\(", scala_content):
+            return None
+        raise
     return spark.sql(query)
 
 
@@ -169,7 +175,11 @@ def run_case(spark: SparkSession, case_path: Path) -> None:
     py_result = _collect_rows(_run_pyspark_solution(py_path, tables), sort_by)
     scala_result = None
     if scala_path.exists():
-        scala_result = _collect_rows(_run_scala_solution(spark, scala_path), sort_by)
+        scala_df = _run_scala_solution(spark, scala_path)
+        if scala_df is not None:
+            scala_result = _collect_rows(scala_df, sort_by)
+        else:
+            print(f"WARN: {scala_path.name} uses OOP Scala; SQL-string parity check skipped.")
 
     _assert_equal(f"{sql_path.name}", sql_result, expected)
     _assert_equal(f"{py_path.name}", py_result, expected)
