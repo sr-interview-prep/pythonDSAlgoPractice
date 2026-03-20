@@ -13,7 +13,7 @@ active AS (
    AND p.month = c.month - INTERVAL '1 month'
 )
 SELECT
-  EXTRACT(MONTH FROM month) AS mth,
+  EXTRACT(month FROM month) AS mth,
   COUNT(DISTINCT user_id) AS monthly_active_users
 FROM active
 WHERE month = DATE '2022-07-01'
