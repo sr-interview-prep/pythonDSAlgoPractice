@@ -1,4 +1,5 @@
 import argparse
+from decimal import Decimal
 import importlib.util
 import inspect
 import json
@@ -39,6 +40,8 @@ def _read_json(path: Path) -> dict[str, Any]:
 def _normalize_value(value: Any) -> Any:
     if isinstance(value, (date, datetime)):
         return value.isoformat()
+    if isinstance(value, Decimal):
+        return float(value)
     return value
 
 

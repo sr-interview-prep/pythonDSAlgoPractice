@@ -1,0 +1,33 @@
+{
+  "tables": {
+    "ads": {
+      "schema": {
+        "ad_id": "int",
+        "action": "string"
+      },
+      "rows": [
+        {"ad_id": 1, "action": "Clicked"},
+        {"ad_id": 1, "action": "Viewed"},
+        {"ad_id": 1, "action": "Ignored"},
+        {"ad_id": 2, "action": "Viewed"},
+        {"ad_id": 2, "action": "Viewed"},
+        {"ad_id": 3, "action": "Clicked"},
+        {"ad_id": 3, "action": "Clicked"},
+        {"ad_id": 3, "action": "Viewed"},
+        {"ad_id": 4, "action": "Ignored"},
+        {"ad_id": 5, "action": "Clicked"},
+        {"ad_id": 5, "action": "Viewed"},
+        {"ad_id": 5, "action": "Viewed"},
+        {"ad_id": 5, "action": "Clicked"}
+      ]
+    }
+  },
+  "expected": [
+    {"ad_id": 3, "ctr": 66.67},
+    {"ad_id": 1, "ctr": 50.0},
+    {"ad_id": 5, "ctr": 50.0},
+    {"ad_id": 2, "ctr": 0.0},
+    {"ad_id": 4, "ctr": 0.0}
+  ],
+  "sort_by": ["ad_id"]
+}
