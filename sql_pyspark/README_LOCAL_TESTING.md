@@ -1,8 +1,9 @@
-# Local SQL + PySpark Testing
+# Local SQL + PySpark + Scala Testing
 
 This folder includes a local test runner that validates:
 - Spark SQL solution (`<problem>.sql`)
 - PySpark solution (`<problem>.py`)
+- Scala solution (`<problem>.scala`, optional)
 
 for the same problem and checks they produce identical output.
 
@@ -11,11 +12,13 @@ for the same problem and checks they produce identical output.
 For each problem, keep these files in the same folder:
 - `<problem>.sql`
 - `<problem>.py`
+- `<problem>.scala` (optional)
 - `<problem>.test.json`
 
 Example:
 - `leetcode_hard/active_user_retention.sql`
 - `leetcode_hard/active_user_retention.py`
+- `leetcode_hard/active_user_retention.scala`
 - `leetcode_hard/active_user_retention.test.json`
 
 The PySpark file must expose a function with the same name as the file:
@@ -127,5 +130,6 @@ For each case:
 2. Registers temp views for SQL execution.
 3. Executes `<problem>.sql`.
 4. Executes `<problem>.py`.
-5. Compares each output against `expected`.
-6. Compares SQL output vs PySpark output.
+5. Executes `<problem>.scala` if present (query extracted from `val query = """..."""`).
+6. Compares each output against `expected`.
+7. Compares SQL output vs PySpark output (and Scala output when present).

@@ -3,6 +3,7 @@ import importlib.util
 import inspect
 import json
 import os
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -116,6 +117,31 @@ def _run_sql_solution(spark: SparkSession, sql_path: Path) -> DataFrame:
     return spark.sql(query)
 
 
+def _extract_scala_query(scala_content: str) -> str:
+    patterns = [
+        r'val\s+query\s*=\s*"""(.*?)"""',
+        r'val\s+sql\s*=\s*"""(.*?)"""',
+        r'val\s+sparkSql\s*=\s*"""(.*?)"""',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, scala_content, flags=re.DOTALL)
+        if match:
+            raw_query = match.group(1).strip()
+            cleaned_lines = [re.sub(r"^\s*\|", "", line) for line in raw_query.splitlines()]
+            return "\n".join(cleaned_lines).strip()
+
+    raise ValueError(
+        "Could not parse Scala query. Add one of: val query = \"\"\"...\"\"\", "
+        "val sql = \"\"\"...\"\"\", or val sparkSql = \"\"\"...\"\"\"."
+    )
+
+
+def _run_scala_solution(spark: SparkSession, scala_path: Path) -> DataFrame:
+    scala_content = scala_path.read_text(encoding="utf-8")
+    query = _extract_scala_query(scala_content)
+    return spark.sql(query)
+
+
 def _assert_equal(name: str, actual: list[dict[str, Any]], expected: list[dict[str, Any]]) -> None:
     if actual != expected:
         raise AssertionError(
@@ -129,6 +155,7 @@ def run_case(spark: SparkSession, case_path: Path) -> None:
     stem = case_path.stem.replace(".test", "")
     sql_path = case_path.with_name(f"{stem}.sql")
     py_path = case_path.with_name(f"{stem}.py")
+    scala_path = case_path.with_name(f"{stem}.scala")
     if not sql_path.exists() or not py_path.exists():
         raise FileNotFoundError(
             f"Expected matching files for {case_path.name}: {sql_path.name} and {py_path.name}."
@@ -140,10 +167,17 @@ def run_case(spark: SparkSession, case_path: Path) -> None:
 
     sql_result = _collect_rows(_run_sql_solution(spark, sql_path), sort_by)
     py_result = _collect_rows(_run_pyspark_solution(py_path, tables), sort_by)
+    scala_result = None
+    if scala_path.exists():
+        scala_result = _collect_rows(_run_scala_solution(spark, scala_path), sort_by)
 
     _assert_equal(f"{sql_path.name}", sql_result, expected)
     _assert_equal(f"{py_path.name}", py_result, expected)
     _assert_equal("SQL vs PySpark", sql_result, py_result)
+    if scala_result is not None:
+        _assert_equal(f"{scala_path.name}", scala_result, expected)
+        _assert_equal("SQL vs Scala", sql_result, scala_result)
+        _assert_equal("PySpark vs Scala", py_result, scala_result)
 
 
 def _discover_all_cases() -> list[Path]:
