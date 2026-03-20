@@ -119,9 +119,9 @@ def _run_sql_solution(spark: SparkSession, sql_path: Path) -> DataFrame:
 
 def _extract_scala_query(scala_content: str) -> str:
     patterns = [
-        r'val\s+query\s*=\s*"""(.*?)"""',
-        r'val\s+sql\s*=\s*"""(.*?)"""',
-        r'val\s+sparkSql\s*=\s*"""(.*?)"""',
+        r'val\s+query(?:\s*:\s*[\w\.\[\]]+)?\s*=\s*"""(.*?)"""',
+        r'val\s+sql(?:\s*:\s*[\w\.\[\]]+)?\s*=\s*"""(.*?)"""',
+        r'val\s+sparkSql(?:\s*:\s*[\w\.\[\]]+)?\s*=\s*"""(.*?)"""',
     ]
     for pattern in patterns:
         match = re.search(pattern, scala_content, flags=re.DOTALL)
