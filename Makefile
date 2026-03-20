@@ -4,7 +4,7 @@ CURSOR_CMD ?= /Applications/Cursor.app/Contents/Resources/app/bin/cursor
 VSCODE_CMD ?= code
 IDE_CMD ?= $(CURSOR_CMD)
 NPM_REGISTRY ?= https://registry.npmjs.org
-RUNNER := sql_pyspark/local_test_runner.py
+RUNNER := data_manipulation/local_test_runner.py
 EXT_DIR := vscode-extension
 EXT_NAME := sql-pyspark-test-runner
 EXT_VERSION := 0.0.1
@@ -12,7 +12,7 @@ EXT_VSIX := $(EXT_DIR)/$(EXT_NAME)-$(EXT_VERSION).vsix
 RAW_TARGET := $(word 2,$(MAKECMDGOALS))
 PROBLEM_FROM_GOAL := $(patsubst %.test.json,%,$(patsubst %.sql,%,$(patsubst %.py,%,$(RAW_TARGET))))
 
-.PHONY: test clean sqlpyspark-test sqlpyspark-test-all sqlpyspark-test-case ext-deps ext-build ext-package ext-install
+.PHONY: test test-all clean sqlpyspark-test sqlpyspark-test-all sqlpyspark-test-case ext-deps ext-build ext-package ext-install
 
 test:
 	@if [ -z "$(RAW_TARGET)" ]; then \
@@ -27,6 +27,10 @@ test:
 clean:
 	rm -rf "__pycache__" ".pytest_cache" "metastore_db" "spark-warehouse" "derby.log"
 	rm -rf sql_pyspark/**/__pycache__
+	rm -rf data_manipulation/**/__pycache__
+
+test-all:
+	$(PYTHON) "$(RUNNER)" --all
 
 sqlpyspark-test:
 	@if [ -z "$(PROBLEM)" ]; then \
@@ -36,7 +40,7 @@ sqlpyspark-test:
 	$(PYTHON) "$(RUNNER)" --problem "$(PROBLEM)"
 
 sqlpyspark-test-all:
-	$(PYTHON) "$(RUNNER)" --all
+	$(MAKE) test-all
 
 sqlpyspark-test-case:
 	@if [ -z "$(CASE)" ]; then \

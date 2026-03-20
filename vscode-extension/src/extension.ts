@@ -1,18 +1,21 @@
 import * as path from "path";
 import * as vscode from "vscode";
 
+const SUPPORTED_ROOTS = ["sql_pyspark/", "data_manipulation/"] as const;
+
 function shellQuote(value: string): string {
   return `'${value.replace(/'/g, `'\\''`)}'`;
 }
 
 function toProblemTarget(workspaceRoot: string, filePath: string): string | undefined {
   const relative = path.relative(workspaceRoot, filePath).split(path.sep).join("/");
-  if (!relative.startsWith("sql_pyspark/")) {
-    return undefined;
+  for (const root of SUPPORTED_ROOTS) {
+    if (relative.startsWith(root)) {
+      const withoutPrefix = relative.slice(root.length);
+      return withoutPrefix.replace(/\.(sql|py|scala|test\.json)$/i, "");
+    }
   }
-
-  const withoutPrefix = relative.slice("sql_pyspark/".length);
-  return withoutPrefix.replace(/\.(sql|py|test\.json)$/i, "");
+  return undefined;
 }
 
 function getOrCreateTerminal(workspaceRoot: string): vscode.Terminal {
@@ -39,7 +42,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
       if (!workspaceRoot || !activePath) {
         void vscode.window.showErrorMessage(
-          "Open a workspace and file under sql_pyspark first."
+          "Open a workspace and file under sql_pyspark or data_manipulation first."
         );
         return;
       }
@@ -47,7 +50,7 @@ export function activate(context: vscode.ExtensionContext): void {
       const target = toProblemTarget(workspaceRoot, activePath);
       if (!target) {
         void vscode.window.showErrorMessage(
-          "Current file must be inside sql_pyspark."
+          "Current file must be inside sql_pyspark or data_manipulation."
         );
         return;
       }
@@ -63,8 +66,8 @@ export function activate(context: vscode.ExtensionContext): void {
       void vscode.window.showErrorMessage("Open the repository workspace first.");
       return;
     }
-    runMakeCommand(workspaceRoot, "make sqlpyspark-test-all");
-    void vscode.window.showInformationMessage("Running all SQL PySpark tests.");
+    runMakeCommand(workspaceRoot, "make test-all");
+    void vscode.window.showInformationMessage("Running all data manipulation tests.");
   });
 
   context.subscriptions.push(runForCurrent, runAll);
